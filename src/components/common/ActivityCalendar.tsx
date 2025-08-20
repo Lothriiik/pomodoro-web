@@ -40,8 +40,8 @@ const getFillColor = (count: number) => {
   return colorLevels[5].colorClass;
 };
 
-const CELL_SIZE = 16; // quadradinho w-4 h-4 = 16px
-const CELL_GAP = 3; // gap menor para combinar
+const CELL_SIZE = 16; 
+const CELL_GAP = 3;
 
 const parseDateLocal = (dateString: string) => {
   const [year, month, day] = dateString.split("-").map(Number);
@@ -84,11 +84,9 @@ export function ActivityCalendar() {
     const yearEnd = new Date(selectedYear, 11, 31);
     yearEnd.setHours(23, 59, 59, 999);
 
-    // Começa no domingo anterior a 1º de jan
     const startDate = new Date(yearStart);
     startDate.setDate(startDate.getDate() - startDate.getDay());
 
-    // Termina no sábado posterior ao 31 de dez
     const endDate = new Date(yearEnd);
     endDate.setDate(endDate.getDate() + (6 - endDate.getDay()));
 
@@ -111,7 +109,6 @@ export function ActivityCalendar() {
 
     const totalCommits = realDays.reduce((acc, day) => acc + day.count, 0);
 
-    // Monta grid: cada coluna = uma semana (7 dias)
     const grid: ({ date: string; count: number } | null)[][] = [];
     for (let i = 0; i < days.length; i += daysInWeek) {
       grid.push(days.slice(i, i + daysInWeek));
@@ -153,7 +150,7 @@ export function ActivityCalendar() {
         </div>
 
         <div className="flex" style={{ minWidth: 0 }}>
-          {/* Nomes dos dias fixos */}
+
           <div className="flex flex-col gap-[3px] text-xs text-neutral-400 min-w-[36px] pr-1">
             {dayNames.map((day, index) => (
               <div
@@ -167,7 +164,6 @@ export function ActivityCalendar() {
             ))}
           </div>
 
-          {/* Meses em cima + quadradinhos */}
           <div
             className="overflow-x-auto w-full"
             style={{ minWidth: 0, maxWidth: "100%" }}
@@ -178,7 +174,6 @@ export function ActivityCalendar() {
                 minWidth: calendarGrid.length * (CELL_SIZE + CELL_GAP),
               }}
             >
-              {/* Linha dos meses */}
               <div className="flex gap-[3px] pl-[22px] text-xs text-neutral-400 select-none h-[14px]">
                 {calendarGrid.map((week, weekIndex) => {
                   const firstDay = week.find((day) => day !== null);
@@ -210,7 +205,6 @@ export function ActivityCalendar() {
                 })}
               </div>
 
-              {/* Quadradinhos */}
               <div className="flex gap-[3px]">
                 {calendarGrid.map((week, weekIndex) => (
                   <div key={weekIndex} className="flex flex-col gap-[3px]">
@@ -254,7 +248,6 @@ export function ActivityCalendar() {
           </div>
         </div>
 
-        {/* Legenda */}
         <div className="flex justify-end items-center gap-3 mt-4 text-xs text-neutral-400 select-none flex-wrap">
           <Tooltip>
             <TooltipTrigger asChild>
