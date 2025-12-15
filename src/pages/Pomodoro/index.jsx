@@ -1,6 +1,6 @@
 import Timer from "@/components/Timer"
 
-export default function HomePage() {
+export default function Pomodoro() {
   return (
     <div className="flex justify-center items-center h-full">
       <Timer/>
