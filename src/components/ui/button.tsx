@@ -22,7 +22,14 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         roxo: "bg-primaryPurple hover:bg-primaryPurpleHover text-primaryBackground font-semibold",
-        azul: "bg-transparent hover:bg-primaryBlue hover:text-primaryBackground text-primaryBlue font-semibold",
+        letraAzul: "bg-transparent hover:bg-primaryBlue hover:text-primaryBackground text-primaryBlue font-semibold",
+        letraCinza: "bg-transparent hover:text-white text-gray-default font-semibold",
+        azul: "bg-primaryBlue hover:bg-primaryBlueHover text-primaryBackground font-semibold",
+        verde: "bg-primaryGreen hover:bg-primaryGreenHover text-primaryBackground font-semibold",
+        rosa: "bg-primaryPink hover:bg-primaryPinkHover text-primaryBackground font-semibold",
+        laranja: "bg-primaryOrange hover:bg-primaryOrangeHover text-primaryBackground font-semibold",
+        vermelho: "bg-primaryRed hover:bg-primaryRedHover text-primaryBackground font-semibold",
+        amarelo: "bg-primaryYellow hover:bg-primaryellowHover text-primaryBackground font-semibold",
         cinza: "bg-transparent hover:bg-primaryPurple hover:text-primaryBackground text-gray-default font-semibold",
       },
       size: {
@@ -42,6 +49,16 @@ const buttonVariants = cva(
   }
 )
 
+const hoverClasses: Record<string, string> = {
+  roxo: "hover:bg-primaryPurple hover:text-primaryBackground",
+  azul: "hover:bg-primaryBlue hover:text-primaryBackground",
+  verde: "hover:bg-primaryGreen hover:text-primaryBackground",
+  laranja: "hover:bg-primaryOrange hover:text-primaryBackground",
+  amarelo: "hover:bg-primaryYellow hover:text-primaryBackground",
+  rosa: "hover:bg-primaryPink hover:text-primaryBackground",
+};
+
+
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
@@ -57,14 +74,16 @@ function Button({
   isLoading = false,
   children,
   disabled,
+  activeColor,
   ...props
-}: ButtonProps) {
+}: ButtonProps & { activeColor?: string }) {
   const Comp = asChild ? Slot : "button"
+  const colorClass = activeColor ? hoverClasses[activeColor] : "";
 
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size }), colorClass)}
       disabled={disabled || isLoading}
       {...props}
     >

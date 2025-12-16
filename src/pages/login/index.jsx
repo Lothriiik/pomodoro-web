@@ -5,7 +5,7 @@ import MobileLogo from "@/components/MobileLogo";
 
 export default function Login() {
   useEffect(() => {
-    document.title = "Login | Sandora";
+    document.title = "Login | Pomodoro";
   }, []);
 
   return (

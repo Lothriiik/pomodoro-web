@@ -1,21 +1,32 @@
 @import "tailwindcss";
 
-
 @custom-variant dark (&:is(.dark *));
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 @theme {
-  --color-primaryPurple: #9D8DF1;
+  
   --color-primaryBackground: #14171B;
   --color-primaryBackgroundinput: #D9D9D9;
   --color-primaryPurpleHover: #692CFF;
+  --color-primaryPurple: #9D8DF1;
+  --color-primaryBlueHover: #6A8FE8;
   --color-primaryBlue: #B8CDF8;
+  --color-primaryGreenHover: #5F8A57;
+  --color-primaryGreen: #8FAD88;
+  --color-primaryPinkHover: #E56AAE;
+  --color-primaryPink: #F5A8D0;
+  --color-primaryOrangeHover: #E66A55;
+  --color-primaryOrange: #F19D8D;
+  --color-primaryRedHover: #D94545;
+  --color-primaryRed: #F06767;
+  --color-primaryYellowHover: #E0C94F;
+  --color-primaryYellow: #F6E58D;
 
 }
 
