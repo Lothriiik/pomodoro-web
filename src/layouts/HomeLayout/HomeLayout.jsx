@@ -141,7 +141,7 @@ export default function HomeLayout() {
           </SidebarFooter>
         </Sidebar>
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 pl-10 pr-10">
           <Outlet />
         </main>
       </div>

@@ -28,7 +28,6 @@ export default function Timer() {
   const [time, setTime] = useState(MODES.foco.time);
   const [isRunning, setIsRunning] = useState(false);
   const [finished, setFinished] = useState(false);
-
   const intervalRef = useRef(null);
 
   function formatTime(seconds) {
@@ -37,16 +36,15 @@ export default function Timer() {
     const sec = seconds % 60;
 
     if (hrs > 0) {
-        return `${String(hrs).padStart(2, "0")}:${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+      return `${String(hrs).padStart(2, "0")}:${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
     }
-
     return `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
   } 
 
 
   function addMinutes(minutes) {
-        setTime(prev => prev + minutes * 60);
-    }
+    setTime(prev => prev + minutes * 60);
+  }
 
   function changeMode(newMode) {
     setMode(newMode);
@@ -56,27 +54,27 @@ export default function Timer() {
     clearInterval(intervalRef.current);
   }
 
-    function resetTime() {
+  function resetTime() {
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+
+    setIsRunning(false);
+    setFinished(false);
+    setTime(MODES[mode].time);
+  }
+
+  function tick() {
+    setTime(prev => {
+      if (prev <= 1) {
         clearInterval(intervalRef.current);
-        intervalRef.current = null;
-
         setIsRunning(false);
-        setFinished(false);
-        setTime(MODES[mode].time);
-    }
-
-    function tick() {
-        setTime(prev => {
-            if (prev <= 1) {
-            clearInterval(intervalRef.current);
-            setIsRunning(false);
-            setFinished(true);
-            playBeep(mode);
-            return 0;
-            }
-            return prev - 1;
-        });
-    }
+        setFinished(true);
+        playBeep(mode);
+        return 0;
+      }
+      return prev - 1;
+    });
+  }
 
 
 
@@ -91,21 +89,21 @@ export default function Timer() {
   }
 
   useEffect(() => {
-  if (!isRunning) {
-    clearInterval(intervalRef.current);
-    return;
-  }
-
-  setTime(prev => {
-    if (prev <= 1) {
+    if (!isRunning) {
       clearInterval(intervalRef.current);
-      setIsRunning(false);
-      setFinished(true);
-      playBeep(mode);
-      return 0;
+      return;
     }
-    return prev - 1;
-  });
+
+    setTime(prev => {
+      if (prev <= 1) {
+        clearInterval(intervalRef.current);
+        setIsRunning(false);
+        setFinished(true);
+        playBeep(mode);
+        return 0;
+      }
+      return prev - 1;
+    });
 
     intervalRef.current = setInterval(() => {
         setTime(prev => {
@@ -121,7 +119,7 @@ export default function Timer() {
     }, 1000);
 
     return () => clearInterval(intervalRef.current);
-    }, [isRunning, mode]);
+  }, [isRunning, mode]);
 
 
   return (
