@@ -77,7 +77,7 @@ export default function HomeLayout() {
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => navigate("/home/calendario")}>
+                    <SidebarMenuButton onClick={() => navigate("/home/semanal")}>
                       <Calendar className="w-5 h-5" />
                       Calendário
                     </SidebarMenuButton>

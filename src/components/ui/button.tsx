@@ -24,6 +24,7 @@ const buttonVariants = cva(
         roxo: "bg-primaryPurple hover:bg-primaryPurpleHover text-primaryBackground font-semibold",
         letraAzul: "bg-transparent hover:bg-primaryBlue hover:text-primaryBackground text-primaryBlue font-semibold",
         letraCinza: "bg-transparent hover:text-white text-gray-default font-semibold",
+        cancelar: "bg-transparent hover:bg-primaryRed hover:text-primaryBackground hover:border-primaryBackground text-gray-default border-gray-default border font-semibold",
         azul: "bg-primaryBlue hover:bg-primaryBlueHover text-primaryBackground font-semibold",
         verde: "bg-primaryGreen hover:bg-primaryGreenHover text-primaryBackground font-semibold",
         rosa: "bg-primaryPink hover:bg-primaryPinkHover text-primaryBackground font-semibold",
@@ -59,7 +60,7 @@ const hoverClasses: Record<string, string> = {
 };
 
 
-interface ButtonProps
+export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean
