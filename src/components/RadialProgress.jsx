@@ -4,7 +4,7 @@ export function RadialProgress({ value, size = 96, stroke = 8 }) {
   const offset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-1 ">
       <svg width={size} height={size} className="rotate-[-90deg]">
         <circle
           cx={size / 2}
@@ -35,7 +35,7 @@ export function RadialProgress({ value, size = 96, stroke = 8 }) {
         </span>
       </div>
 
-      <span className="text-gray-400 text-sm">Aproveitamento</span>
+      <span className="text-gray-400 text-sm tracking-tight truncate">Aproveitamento</span>
     </div>
   );
 }

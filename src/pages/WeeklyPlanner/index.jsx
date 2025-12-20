@@ -55,8 +55,8 @@ export default function WeeklyPlanner() {
     <div className="flex flex-col h-screen gap-6">
       <header className="h-[10vh] mt-10 flex justify-between items-center ">
         <div className='h-full'>
-          <h1 className='text-white text-2xl font-bold'>Planejamento Semanal</h1>
-          <div className="text-gray-300 text-sm">Gerencie seus projetos e acompanhe o progresso</div>
+          <h1 className='text-white text-2xl font-bold tracking-tight truncate'>Planejamento Semanal</h1>
+          <div className="text-gray-300 text-sm tracking-tight truncate">Gerencie seus projetos e acompanhe o progresso</div>
         </div>
         <div>
           <PaginationWeeklyPlanner 
@@ -153,8 +153,8 @@ export default function WeeklyPlanner() {
               </div>
             </div>
           </div>
-          <div className='flex flex-col items-center min-w-0 w-[30%] justify-center pt-4'>
-              <RadialProgress value={50} size={60} />
+          <div className='flex flex-col items-center min-w-0 w-[30%] justify-center pt-4 '>
+              <RadialProgress value={50} size={60} className="tracking-tight truncate"/>
           </div>
         </div>
 
@@ -175,8 +175,8 @@ export default function WeeklyPlanner() {
               </div>
             </div>
           </div>
-          <div className='flex flex-col items-center min-w-0 w-[30%] justify-center pt-4'>
-              <RadialProgress value={80} size={60} />
+          <div className='flex flex-col items-center min-w-0 w-[30%] justify-center pt-4 '>
+              <RadialProgress value={80} size={60} className="tracking-tight truncate"/>
           </div>
         </div>
       </div>

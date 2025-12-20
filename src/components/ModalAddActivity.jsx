@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
 import {
   Dialog,
   DialogClose,
@@ -26,10 +25,10 @@ export function ModalAddActivity({ day }) {
     <Dialog>
       <DialogTrigger asChild  >
         <button
-            onClick={(e) => e.stopPropagation()} 
-            className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primaryBackground rounded-full flex items-center justify-center border border-primaryPurple hover:scale-110 transition-transform shadow-lg z-10"
+          onClick={(e) => e.stopPropagation()} 
+          className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primaryBackground rounded-full flex items-center justify-center border border-primaryPurple hover:scale-110 transition-transform shadow-lg z-10"
         >
-            <span className="text-primaryPurple text-xl ">+</span>
+          <span className="text-primaryPurple text-xl ">+</span>
         </button>
       </DialogTrigger>
 

@@ -141,7 +141,7 @@ export default function HomeLayout() {
           </SidebarFooter>
         </Sidebar>
 
-        <main className="flex-1 pl-10 pr-10">
+        <main className="flex-1 pl-10 pr-10 overflow-x-auto custom-scrollbar">
           <Outlet />
         </main>
       </div>

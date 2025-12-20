@@ -32,6 +32,7 @@ const buttonVariants = cva(
         vermelho: "bg-primaryRed hover:bg-primaryRedHover text-primaryBackground font-semibold",
         amarelo: "bg-primaryYellow hover:bg-primaryellowHover text-primaryBackground font-semibold",
         cinza: "bg-transparent hover:bg-primaryPurple hover:text-primaryBackground text-gray-default font-semibold",
+        brancoBordas: "bg-transparent hover:bg-primaryPurple hover:text-primaryBackground text-gray-default border-white/15 border",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
