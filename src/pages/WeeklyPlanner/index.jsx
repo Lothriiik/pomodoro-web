@@ -4,6 +4,7 @@ import { PaginationWeeklyPlanner } from '../../components/PaginationWeeklyPlanne
 import { MOCK_DATA } from '../../mocks/mockData'; 
 import { RadialProgress } from '../../components/RadialProgress';
 import { ModalAddActivity } from '../../components/ModalAddActivity';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Popover,
   PopoverContent,
@@ -13,10 +14,34 @@ import {
 export default function WeeklyPlanner() {
   const [weekOffset, setWeekOffset] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [direction, setDirection] = useState(0);
+
+
+  const handleWeekChange = (newOffset) => {
+    setDirection(newOffset > weekOffset ? 1 : -1);
+    setWeekOffset(newOffset);
+  };
+  
+  const variants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 200 : -200,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      
+    },
+    exit: (direction) => ({
+      zIndex: 0,
+      x: direction < 0 ? 200 : -200,
+      opacity: 0,
+    }),
+  };
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-height: 700px)");
+    const mediaQuery = window.matchMedia("(max-height: 760px)");
     setIsSmallScreen(mediaQuery.matches);
     const handler = (e) => setIsSmallScreen(e.matches);
     mediaQuery.addEventListener("change", handler);
@@ -61,78 +86,92 @@ export default function WeeklyPlanner() {
         <div>
           <PaginationWeeklyPlanner 
             weekOffset={weekOffset} 
-            onChange={setWeekOffset} 
+            onChange={handleWeekChange} 
           />
         </div>
       </header>
-      <div className="flex flex-row justify-between h-[50vh] w-full">
-        {weekDays.map((day) => {
-          const isSelected = selectedDay === day.key;
-          const activities = MOCK_DATA[`${weekOffset}-${day.key}`] || [];
-          return (
-            <div 
-              key={day.key} 
-              onClick={() => setSelectedDay(day.key)}
-              className={`relative flex flex-col border rounded-lg p-2 items-center w-40 h-auto cursor-pointer transition-all ${
-                isSelected 
-                  ? "border-primaryPurple ring-1 ring-primaryPurple/20" 
-                  : "border-white/15 hover:border-white/30"
-              }`}
-            >
-              <div className='h-[10vh] flex flex-col justify-center items-center w-full'>
-                <h3 className={`text-sm ${isSelected ? "text-primaryPurple" : "text-gray-400"}`}>
-                  {day.label}
-                </h3>
-                <h1 className={`text-md ${isSelected ? "text-primaryPurple font-bold" : "text-white"}`}>
-                  {day.displayDate}
-                </h1>
-                <div className="h-2 mt-1 flex items-center justify-center">
-                  {day.isToday && <div className="w-1.5 h-1.5 bg-primaryPurple rounded-full"></div>}
+      <AnimatePresence mode="popLayout" custom={direction}>
+        <motion.div 
+          key={weekOffset} 
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            x: { type: "spring", stiffness: 200, damping: 25 },
+            opacity: { duration: 0.2 }
+          }}
+          className="flex flex-row justify-between h-[50vh] w-full "
+        >
+          {weekDays.map((day) => {
+            const isSelected = selectedDay === day.key;
+            const activities = MOCK_DATA[`${weekOffset}-${day.key}`] || [];
+            return (
+              <div 
+                key={day.key} 
+                onClick={() => setSelectedDay(day.key)}
+                className={`relative flex flex-col border rounded-lg p-2 items-center w-40 h-auto cursor-pointer transition-all ${
+                  isSelected 
+                    ? "border-primaryPurple ring-1 ring-primaryPurple/20" 
+                    : "border-white/15 hover:border-white/30"
+                }`}
+              >
+                <div className='h-[10vh] flex flex-col justify-center items-center w-full'>
+                  <h3 className={`text-sm ${isSelected ? "text-primaryPurple" : "text-gray-400"}`}>
+                    {day.label}
+                  </h3>
+                  <h1 className={`text-md ${isSelected ? "text-primaryPurple font-bold" : "text-white"}`}>
+                    {day.displayDate}
+                  </h1>
+                  <div className="h-2 mt-1 flex items-center justify-center">
+                    {day.isToday && <div className="w-1.5 h-1.5 bg-primaryPurple rounded-full"></div>}
+                  </div>
                 </div>
-              </div>
-              <div className="activities-list overflow-y-auto w-full flex flex-col items-center gap-2 mb-4">
-                {activities.length > cardLimit ? (
-                  <>
-                    {activities.slice(0, cardLimit).map((act) => (
-                      <ActivityCardReduced key={act.id} {...act} />
-                    ))}
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <div className="h-15 w-32 py-2 border border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center bg-white/5 hover:bg-white/10 transition-colors cursor-pointer shrink-0">
-                          <span className="text-white font-bold text-sm">
-                            {activities.length - cardLimit}+
-                          </span>
-                          <span className="text-gray-400 text-[10px] uppercase">mais</span>
-                        </div>
-                      </PopoverTrigger>
-                      
-                      <PopoverContent 
-                        side="right"           
-                        align="bottom"
-                        className="w-41 p-2 bg-primaryBackground border-white/20 p-2 shadow-2xl"
-                      >
-                        <div className="flex flex-col gap-2 max-h-[300px] overflow-y-auto p-2 custom-scrollbar">
-                          <p className="text-[10px] text-zinc-500 uppercase font-bold mb-1 px-1">Restante do dia</p>
-                          {activities.slice(cardLimit).map((act) => (
-                            <ActivityCard key={act.id} {...act} />
-                          ))}
-                        </div>
-                      </PopoverContent>
-                    </Popover>
-                  </>
-                ) : (
-                  activities.map((act) => (
-                    <ActivityCard key={act.id} {...act} />
-                  ))
+                <div className="activities-list overflow-y-auto w-full flex flex-col items-center gap-2 mb-4">
+                  {activities.length > cardLimit ? (
+                    <>
+                      {activities.slice(0, cardLimit).map((act) => (
+                        <ActivityCardReduced key={act.id} {...act} />
+                      ))}
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <div className="h-15 w-32 py-2 border border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center bg-white/5 hover:bg-white/10 transition-colors cursor-pointer shrink-0">
+                            <span className="text-white font-bold text-sm">
+                              {activities.length - cardLimit}+
+                            </span>
+                            <span className="text-gray-400 text-[10px] uppercase">mais</span>
+                          </div>
+                        </PopoverTrigger>
+                        
+                        <PopoverContent 
+                          side="right"           
+                          align="bottom"
+                          className="w-41 p-2 bg-primaryBackground border-white/20 p-2 shadow-2xl"
+                        >
+                          <div className="flex flex-col gap-2 max-h-[300px] overflow-y-auto p-2 custom-scrollbar">
+                            <p className="text-[10px] text-zinc-500 uppercase font-bold mb-1 px-1">Restante do dia</p>
+                            {activities.slice(cardLimit).map((act) => (
+                              <ActivityCard key={act.id} {...act} />
+                            ))}
+                          </div>
+                        </PopoverContent>
+                      </Popover>
+                    </>
+                  ) : (
+                    activities.map((act) => (
+                      <ActivityCard key={act.id} {...act} />
+                    ))
+                  )}
+                </div>
+                {isSelected && (
+                  <ModalAddActivity day={`${day.label} ${day.displayDate}`} />
                 )}
               </div>
-              {isSelected && (
-                <ModalAddActivity day={`${day.label} ${day.displayDate}`} />
-              )}
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </motion.div>
+      </AnimatePresence>
       <div className='flex flex-row w-full h-[20vh] justify-between'>
         <div className="h-full w-[44vw] border-white/15 rounded-lg border p-4 flex justify-between ">
           <div className='w-[70%]'>

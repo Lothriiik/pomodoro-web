@@ -1,6 +1,6 @@
 import React from "react"
-import { Outlet, useNavigate, useLocation } from "react-router-dom"
-import { motion } from "framer-motion"
+import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom"
+import { motion, AnimatePresence  } from "framer-motion"
 import {
   SidebarProvider,
   Sidebar,
@@ -22,6 +22,10 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 
+import Pomodoro from "@/pages/Pomodoro"
+import WeeklyPlanner from "@/pages/WeeklyPlanner"
+import Projects from "@/pages/Projects"
+
 import { Button } from "@/components/ui/button"
 import {
   AlarmClock,
@@ -36,7 +40,7 @@ import {
 
 export default function HomeLayout() {
   const navigate = useNavigate()
-  const { pathname } = useLocation()
+  const location = useLocation()
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -69,7 +73,7 @@ export default function HomeLayout() {
                   <SidebarMenuItem>
                     <SidebarMenuButton
                       onClick={() => navigate("/home/pomodoro")}
-                      className={pathname === "/home/pomodoro" ? "text-primaryPurple" : ""}
+                      className={location.pathname === "/home/pomodoro" ? "text-primaryPurple" : ""}
                     >
                       <AlarmClock className="w-5 h-5" />
                       Pomodoro
@@ -142,7 +146,23 @@ export default function HomeLayout() {
         </Sidebar>
 
         <main className="flex-1 pl-10 pr-10 overflow-x-auto custom-scrollbar">
-          <Outlet />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              style={{ height: "100%", opacity: 0 }}
+            >
+              <Routes location={location}>
+                <Route path="pomodoro" element={<Pomodoro />} />
+                <Route path="semanal" element={<WeeklyPlanner />} />
+                <Route path="projetos" element={<Projects />} />
+                <Route path="/" element={<Navigate to="pomodoro" replace />} />
+              </Routes>
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
     </SidebarProvider>

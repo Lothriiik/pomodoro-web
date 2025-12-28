@@ -16,7 +16,8 @@ import {
   Check,
   TrendingUp,
   Funnel,
-  Search
+  Search,
+  ListChecks
 } from "lucide-react"
 import { PaginationProjects } from "../../components/PaginationProjects"
 import { ProjectCard } from "../../components/ProjectCard"
@@ -47,7 +48,7 @@ export default function Projects() {
         </div>
       </header>
       <div className="flex justify-between h-[12%]">
-        <div className="w-[18%] flex border-white/15 rounded-lg border pl-6 p-3 items-center ">
+        <div className="w-[20%] flex border-white/15 rounded-lg border pl-6 p-3 items-center ">
           <div className="bg-primaryPurple/35 h-[80%] w-[35%] rounded-lg justify-center items-center flex ">
             <FolderOpen className="text-primaryPurple" size={24}/>
           </div>
@@ -65,8 +66,8 @@ export default function Projects() {
             <p className="text-gray-300 text-sm tracking-tight truncate w-full">Tempo Total</p>
             <p className="text-white text-xl font-bold tracking-tight truncate w-full">180h 25m</p>
           </div>
-          
         </div>
+
         <div className="w-[20%] flex border-white/15 rounded-lg border pl-6 p-3 items-center">
           <div className="bg-primaryOrange/35 h-[80%] w-[35%] rounded-lg justify-center items-center flex">
             <TrendingUp className="text-primaryOrange" size={24}/>
@@ -93,7 +94,7 @@ export default function Projects() {
           <Input 
             id="title" 
             placeholder="Buscar Projetos..." 
-            className="bg-primaryBackground border-white/15 text-white pl-10 focus-visible:ring-primaryPurple h-10" 
+            className="bg-primaryBackground border-white/15 text-white pl-10 focus-visible:ring-primaryPurple h-9" 
           />
         </div>
         <div className="w-[50%] flex gap-8">
