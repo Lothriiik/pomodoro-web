@@ -51,7 +51,7 @@ export const ActivityCard = ({ time, title, tag, cycles, color }) => {
   const theme = getTheme(color);
 
   return (
-    <div className={`flex flex-col justify-between p-3 mb-2 rounded-lg border border-white/5 ${theme.background} h-28 w-32 shrink-0 transition-all hover:brightness-110`}>
+    <div className={`flex flex-col justify-between p-3 mb-2 rounded-lg border border-white/5 ${theme.background} h-[clamp(5rem,17vh,7rem)] w-[clamp(6.25rem,8vw,16rem)] shrink-0 transition-all hover:brightness-110`}>
       <div className="flex items-center gap-1.5">
         <div className={`w-2 h-2 rounded-full ${theme.dot}`} />
         <span className={`text-xs ${theme.time}`}>{time}</span>
@@ -76,7 +76,7 @@ export const ActivityCardReduced = ({ time, title, cycles, color }) => {
   const theme = getTheme(color);
 
   return (
-    <div className={`flex flex-col gap-2 p-3 mb-2 rounded-lg border border-white/5 ${theme.background} h-22 w-32 shrink-0 transition-all hover:brightness-110`}>
+    <div className={`flex flex-col gap-2 p-3 mb-2 rounded-lg border border-white/5 ${theme.background} h-22 w-[clamp(6.25rem,8vw,16rem)] shrink-0 transition-all hover:brightness-110`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
           <div className={`w-2 h-2 rounded-full ${theme.dot}`} />

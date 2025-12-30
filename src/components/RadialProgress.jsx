@@ -19,13 +19,12 @@ export function RadialProgress({ value, size = 96, stroke = 8 }) {
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#7C3AED"
           strokeWidth={stroke}
           fill="transparent"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           strokeLinecap="round"
-          className="transition-all duration-500"
+          className="transition-all duration-500 stroke-primaryPurple"
         />
       </svg>
 
@@ -35,7 +34,7 @@ export function RadialProgress({ value, size = 96, stroke = 8 }) {
         </span>
       </div>
 
-      <span className="text-gray-400 text-sm tracking-tight truncate">Aproveitamento</span>
+      <span className="text-gray-400 text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight truncate">Aproveitamento</span>
     </div>
   );
 }

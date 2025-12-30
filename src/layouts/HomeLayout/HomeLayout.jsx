@@ -25,6 +25,9 @@ import {
 import Pomodoro from "@/pages/Pomodoro"
 import WeeklyPlanner from "@/pages/WeeklyPlanner"
 import Projects from "@/pages/Projects"
+import DetailsProjects from "../../pages/DetailsProjects"
+import NotFound from "../../pages/NotFound"
+import Unauthorized from "../../pages/Unauthorized"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -159,7 +162,10 @@ export default function HomeLayout() {
                 <Route path="pomodoro" element={<Pomodoro />} />
                 <Route path="semanal" element={<WeeklyPlanner />} />
                 <Route path="projetos" element={<Projects />} />
+                <Route path="detalhes-projetos" element={<DetailsProjects />} />
+                <Route path="notfound" element={<Unauthorized />} />
                 <Route path="/" element={<Navigate to="pomodoro" replace />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </motion.div>
           </AnimatePresence>
