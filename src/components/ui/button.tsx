@@ -42,6 +42,7 @@ const buttonVariants = cva(
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         padrao: "h-10 rounded-md px-10 has-[>svg]:px-4",
         xg: "h-10 w-[140px] rounded-md",
+        full:"h-10 w-full rounded-md",
         add: "size-8 rounded-full",
         icon:'size-8',
         iconbutton: "size-10 rounded-full",

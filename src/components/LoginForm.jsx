@@ -171,6 +171,8 @@ export default function LoginForm({ isMobile = false }) {
 
           <Button
             type="submit"
+            variant="roxo"
+            size="full"
             disabled={isFormIncomplete || isLoading}
             isLoading={isLoading}
           >

@@ -35,8 +35,6 @@ const PriorityItem = ({ value, label, color }) => (
   </ToggleGroupItem>
 )
 
-
-
 function DateInputPicker({ label }) {
   const [date, setDate] = useState(null)
 

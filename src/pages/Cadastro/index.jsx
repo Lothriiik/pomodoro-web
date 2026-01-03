@@ -1,14 +1,13 @@
-import type { Metadata } from "next"
 import CadastroForm from "@/components/CadastroForm"
 import DesktopLogo from "@/components/DesktopLogo"
 import MobileLogo from "@/components/MobileLogo"
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Cadastro | Sandora",
   description: "Crie sua conta e comece a aprender",
 }
 
-export default function CadastroPage() {
+export default function Cadastro() {
   return (
     <>
       {/* desktop */}
@@ -28,8 +27,9 @@ export default function CadastroPage() {
             </div>
           </div>
         </div>
+
         <div className="hidden w-[55%] md:block bg-primaryBackground">
-          <div className="flex h-full items-center justify-center">
+          <div className="flex h-full items-center justify-center ">
             <CadastroForm />
           </div>
         </div>
@@ -48,13 +48,18 @@ export default function CadastroPage() {
                 <span className="text-primaryPurple bg-white pl-1 pr-1 pb-[2px] rounded">aprender</span>
               </h1>
               <p className="text-white mt-4 text-base">
-                <span className="text-primaryPurple bg-white pl-1 pr-1 pb-[2px] pt-[2px] rounded ">Crie sua conta em poucos segundos</span> 
+                <span className="text-primaryPurple bg-white pl-1 pr-1 pb-[2px] pt-[2px] rounded ">
+                  Crie sua conta em poucos segundos
+                </span> 
                 {" "}e comece sua jornada de aprendizado.
               </p>
             </div>
           </div>
+
           <div className="rounded-t-3xl bg-white p-6">
-            <h2 className="mb-6 text-center text-2xl font-semibold">Cadastro</h2>
+            <h2 className="mb-6 text-center text-2xl font-semibold text-zinc-900">
+              Cadastro
+            </h2>
             <CadastroForm isMobile={true} />
           </div>
         </div>

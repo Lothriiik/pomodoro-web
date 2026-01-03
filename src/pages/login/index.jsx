@@ -54,11 +54,11 @@ export default function Login() {
             </div>
           </div>
 
-          <div className="rounded-t-3xl bg-white p-6 flex-1">
-            <h2 className="mb-6 text-center text-2xl font-semibold">
+          <div className="rounded-t-3xl bg-white p-6 flex-1 shadow-2xl">
+            <h2 className="mb-6 text-center text-2xl font-semibold text-zinc-900">
               Login
             </h2>
-            <LoginForm isMobile />
+            <LoginForm isMobile={true} />
           </div>
         </div>
       </div>
