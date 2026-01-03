@@ -17,6 +17,7 @@ import {
   TrendingUp,
   Funnel,
   Search,
+  Plus
 } from "lucide-react"
 import { PaginationProjects } from "../../components/PaginationProjects"
 import { ProjectCard } from "../../components/ProjectCard"
@@ -65,7 +66,7 @@ export default function Projects() {
           <p className="text-gray-300 text-sm tracking-tight truncate">Gerencie seus projetos e acompanhe o progresso</p>
         </div>
         <div>
-          <Button variant="icon" >+</Button>
+          <Button variant="brancoBordas" size="iconbutton" ><Plus/></Button>
         </div>
       </header>
 

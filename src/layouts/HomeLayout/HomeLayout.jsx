@@ -28,6 +28,7 @@ import Projects from "@/pages/Projects"
 import DetailsProjects from "../../pages/DetailsProjects"
 import NotFound from "../../pages/NotFound"
 import Unauthorized from "../../pages/Unauthorized"
+import NewProjects from "../../pages/NewProjects"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -148,7 +149,7 @@ export default function HomeLayout() {
           </SidebarFooter>
         </Sidebar>
 
-        <main className="flex-1 pl-10 pr-10 overflow-x-auto custom-scrollbar">
+        <main className="flex-1 pl-12 pr-12 overflow-x-auto custom-scrollbar">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -164,6 +165,7 @@ export default function HomeLayout() {
                 <Route path="projetos" element={<Projects />} />
                 <Route path="detalhes-projetos" element={<DetailsProjects />} />
                 <Route path="notfound" element={<Unauthorized />} />
+                <Route path="newproject" element={<NewProjects />} />
                 <Route path="/" element={<Navigate to="pomodoro" replace />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
