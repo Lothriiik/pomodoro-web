@@ -51,17 +51,17 @@ export const ActivityCard = ({ time, title, tag, cycles, color }) => {
   const theme = getTheme(color);
 
   return (
-    <div className={`flex flex-col justify-between p-3 mb-2 rounded-lg border border-white/5 ${theme.background} h-[clamp(5rem,17vh,7rem)] w-[clamp(6.25rem,8vw,16rem)] shrink-0 transition-all hover:brightness-110`}>
+    <div className={`flex flex-col justify-between p-3 md:mb-2 rounded-lg border border-white/5 ${theme.background} h-25 md:h-[clamp(5rem,17vh,7rem)] w-26 md:w-[clamp(6.25rem,8vw,16rem)] shrink-0 transition-all hover:brightness-110`}>
       <div className="flex items-center gap-1.5">
         <div className={`w-2 h-2 rounded-full ${theme.dot}`} />
-        <span className={`text-xs ${theme.time}`}>{time}</span>
+        <span className={`text-[9px] md:text-xs ${theme.time}`}>{time}</span>
       </div>
       
-      <h4 className="text-white text-sm font-medium leading-tight line-clamp-2">
+      <h4 className="text-white text-xs md:text-sm font-medium leading-tight line-clamp-2">
         {title}
       </h4>
       
-      <div className="flex justify-between text-[10px] mt-1 items-center">
+      <div className="flex justify-between text-[8px] md:text-[10px] mt-1 items-center">
         <span className="text-gray-400 pr-1">{tag}</span>
         <div className="flex flex-col items-center leading-none shrink-0">
           <span className={`${theme.cycles} font-bold`}>{cycles}</span>
@@ -76,7 +76,7 @@ export const ActivityCardReduced = ({ time, title, cycles, color }) => {
   const theme = getTheme(color);
 
   return (
-    <div className={`flex flex-col gap-2 p-3 mb-2 rounded-lg border border-white/5 ${theme.background} h-22 w-[clamp(6.25rem,8vw,16rem)] shrink-0 transition-all hover:brightness-110`}>
+    <div className={`flex flex-col gap-2 p-3 mb-2 rounded-lg border border-white/5 ${theme.background} h-26 md:h-22 w-28 md:w-[clamp(6.25rem,8vw,16rem)] shrink-0 transition-all hover:brightness-110`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
           <div className={`w-2 h-2 rounded-full ${theme.dot}`} />

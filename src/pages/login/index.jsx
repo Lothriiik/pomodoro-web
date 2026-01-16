@@ -13,7 +13,7 @@ export default function Login() {
       {/* desktop */}
       <div className="hidden min-h-screen w-full md:flex">
         <div className="flex w-full flex-col p-10 md:w-[45%] bg-primaryPurple">
-          <div className="mb-16 ml-6">
+          <div className="mb-10 ml-6">
             <DesktopLogo />
           </div>
 
@@ -40,12 +40,12 @@ export default function Login() {
       <div className="flex min-h-screen flex-col bg-primaryPurple md:hidden">
         <div className="flex flex-col h-screen">
           <div className="p-8 flex flex-col bg-primaryPurple min-h-[40%]">
-            <div className="mt-2">
+            <div className="">
               <MobileLogo />
             </div>
 
-            <div className="mt-4">
-              <h1 className="text-white text-3xl font-bold mt-10">
+            <div className=" mt-5">
+              <h1 className="text-white text-3xl font-bold">
                 Bem-vindo(a) de volta!
               </h1>
               <p className="text-white mt-4 text-base">
@@ -54,8 +54,8 @@ export default function Login() {
             </div>
           </div>
 
-          <div className="rounded-t-3xl bg-white p-6 flex-1 shadow-2xl">
-            <h2 className="mb-6 text-center text-2xl font-semibold text-zinc-900">
+          <div className="rounded-t-3xl bg-primaryBackground p-6 flex-1 shadow-2xl">
+            <h2 className="mb-6 text-center text-2xl font-semibold text-white">
               Login
             </h2>
             <LoginForm isMobile={true} />

@@ -1,6 +1,6 @@
 import React from "react"
 import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom"
-import { motion, AnimatePresence  } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import {
   SidebarProvider,
   Sidebar,
@@ -12,6 +12,8 @@ import {
   SidebarGroupContent,
   SidebarFooter,
   SidebarContent,
+  SidebarTrigger,
+  useSidebar, // Importado para acessar o estado 'open'
 } from "@/components/ui/sidebar"
 
 import {
@@ -42,6 +44,31 @@ import {
   LogOut,
 } from "lucide-react"
 
+function LogoTrigger() {
+  const { open, isMobile, openMobile } = useSidebar();
+  const isOpen = isMobile ? openMobile : open;
+
+  return (
+    <SidebarTrigger asChild>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="hover:bg-transparent"
+      >
+        <motion.img
+          key={isOpen ? "open" : "closed"}
+          src={isOpen ? "/ampulheta-roxa.png" : "/ampulheta-cinza.png"}
+          alt="Logo"
+          width={20}
+          height={20}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 0.5 }}
+        />
+      </Button>
+    </SidebarTrigger>
+  );
+}
+
 export default function HomeLayout() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -49,69 +76,73 @@ export default function HomeLayout() {
 
   return (
     <SidebarProvider open={open} onOpenChange={setOpen}>
-      <div className="flex min-h-screen w-full bg-primaryBackground">
+      <div className="flex min-h-screen w-full bg-primaryBackground flex-col md:flex-row">
+        
+        <header className="flex h-12 items-center justify-between px-4 border-b border-white/10 md:hidden bg-primaryBackground shrink-0">
+          <div className="flex items-center gap-3">
+             <LogoTrigger />
+          </div>
+        </header>
 
         <Sidebar collapsible="icon">
-          <SidebarHeader>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setOpen(!open)}
-            >
-              <motion.img
-                src={open ? "/ampulheta-roxa.png" : "/ampulheta-cinza.png"}
-                alt="Logo"
-                width={24}
-                height={24}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
-              />
-            </Button>
+          <SidebarHeader className="hidden md:flex items-center justify-center p-2">
+            <LogoTrigger />
           </SidebarHeader>
 
           <SidebarContent>
             <SidebarGroup>
               <SidebarGroupContent>
                 <SidebarMenu>
-
                   <SidebarMenuItem>
                     <SidebarMenuButton
                       onClick={() => navigate("/home/pomodoro")}
+                      isActive={location.pathname === "/home/pomodoro"}
                       className={location.pathname === "/home/pomodoro" ? "text-primaryPurple" : ""}
                     >
                       <AlarmClock className="w-5 h-5" />
-                      Pomodoro
+                      <span>Pomodoro</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => navigate("/home/semanal")}>
+                    <SidebarMenuButton 
+                      onClick={() => navigate("/home/semanal")}
+                      isActive={location.pathname === "/home/semanal"}
+                    >
                       <Calendar className="w-5 h-5" />
-                      Calendário
+                      <span>Calendário</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => navigate("/home/atividades")}>
+                    <SidebarMenuButton 
+                      onClick={() => navigate("/home/atividades")}
+                      isActive={location.pathname === "/home/atividades"}
+                    >
                       <ListChecks className="w-5 h-5" />
-                      Atividades
+                      <span>Atividades</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => navigate("/home/estatisticas")}>
+                    <SidebarMenuButton 
+                      onClick={() => navigate("/home/estatisticas")}
+                      isActive={location.pathname === "/home/estatisticas"}
+                    >
                       <ChartColumn className="w-5 h-5" />
-                      Estatísticas
+                      <span>Estatísticas</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => navigate("/home/projetos")}>
+                    <SidebarMenuButton 
+                      onClick={() => navigate("/home/projetos")}
+                      isActive={location.pathname === "/home/projetos"}
+                    >
                       <FolderOpen className="w-5 h-5" />
-                      Projetos
+                      <span>Projetos</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
@@ -124,23 +155,19 @@ export default function HomeLayout() {
                   <DropdownMenuTrigger asChild>
                     <SidebarMenuButton>
                       <User className="w-5 h-5" />
-                      Usuário
+                      <span>Usuário</span>
                     </SidebarMenuButton>
                   </DropdownMenuTrigger>
-
-                  <DropdownMenuContent side="top">
-                    <DropdownMenuItem>
-                      <User /> Conta
+                  <DropdownMenuContent side="top" className="w-48 bg-primaryBackground border-white/10 text-white">
+                    <DropdownMenuItem className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" /> Conta
                     </DropdownMenuItem>
-
-                    <DropdownMenuSeparator />
-
-                    <DropdownMenuItem>
-                      <Cog /> Configurações
+                    <DropdownMenuSeparator className="bg-white/10" />
+                    <DropdownMenuItem className="cursor-pointer">
+                      <Cog className="mr-2 h-4 w-4" /> Configurações
                     </DropdownMenuItem>
-
-                    <DropdownMenuItem className="text-red-500">
-                      <LogOut /> Sair
+                    <DropdownMenuItem className="text-red-500 cursor-pointer">
+                      <LogOut className="mr-2 h-4 w-4" /> Sair
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -149,7 +176,7 @@ export default function HomeLayout() {
           </SidebarFooter>
         </Sidebar>
 
-        <main className="flex-1 pl-12 pr-12 overflow-x-auto custom-scrollbar">
+        <main className="flex-1 px-4 md:px-12 overflow-x-hidden custom-scrollbar">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -157,15 +184,15 @@ export default function HomeLayout() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              style={{ height: "100%", opacity: 0 }}
+              className="h-full w-full"
             >
               <Routes location={location}>
                 <Route path="pomodoro" element={<Pomodoro />} />
                 <Route path="semanal" element={<WeeklyPlanner />} />
                 <Route path="projetos" element={<Projects />} />
-                <Route path="detalhes-projetos" element={<DetailsProjects />} />
+                <Route path="detalhes-projeto" element={<DetailsProjects />} />
                 <Route path="notfound" element={<Unauthorized />} />
-                <Route path="newproject" element={<NewProjects />} />
+                <Route path="novo-projeto" element={<NewProjects />} />
                 <Route path="/" element={<Navigate to="pomodoro" replace />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

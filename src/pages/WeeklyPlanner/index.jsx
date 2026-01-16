@@ -16,6 +16,7 @@ import {
 export default function WeeklyPlanner() {
   const [weekOffset, setWeekOffset] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [direction, setDirection] = useState(0);
 
 
@@ -23,7 +24,7 @@ export default function WeeklyPlanner() {
     setDirection(newOffset > weekOffset ? 1 : -1);
     setWeekOffset(newOffset);
   };
-  
+
   const variants = {
     enter: (direction) => ({
       x: direction > 0 ? 100 : -100,
@@ -43,11 +44,17 @@ export default function WeeklyPlanner() {
   };
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-height: 760px)");
-    setIsSmallScreen(mediaQuery.matches);
-    const handler = (e) => setIsSmallScreen(e.matches);
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
+    const checkScreen = () => {
+
+      const heightQuery = window.matchMedia("(max-height: 760px)");
+      setIsSmallScreen(heightQuery.matches);
+
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
   const cardLimit = isSmallScreen ? 1 : 2;
@@ -79,20 +86,26 @@ export default function WeeklyPlanner() {
   const [selectedDay, setSelectedDay] = useState(todayKey);
 
   return (
-    <div className="flex flex-col h-screen gap-6 overflow-hidden">
-      <header className="h-[10vh] mt-10 flex justify-between items-center shrink-0">
-        <div className='h-full'>
-          <h1 className='text-white text-2xl font-bold tracking-tight truncate'>Planejamento Semanal</h1>
-          <div className="text-gray-300 text-sm tracking-tight truncate">Gerencie seus projetos e acompanhe o progresso</div>
+    <div className="flex flex-col min-h-screen lg:overflow-hidden lg:h-screen gap-6 md:gap-6 justify-between ">
+      <header className="mt-8 sm:mt-10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="w-full md:w-auto self-start">
+          <h1 className="text-white text-xl sm:text-2xl font-bold tracking-tight truncate">
+            Planejamento Semanal
+          </h1>
+          <div className="text-gray-300 text-xs sm:text-sm tracking-tight truncate">
+            Gerencie seus projetos e acompanhe o progresso
+          </div>
         </div>
-        <div>
+
+        <div className="flex-shrink-0">
           <PaginationWeeklyPlanner 
             weekOffset={weekOffset} 
             onChange={handleWeekChange} 
           />
         </div>
       </header>
-      <div className="relative w-full h-[50vh] min-h-[50vh]  shrink-0">
+      
+      <div className="relative w-full h-auto lg:h-[50vh] min-h-[40vh] shrink-0">
         <AnimatePresence mode="popLayout" custom={direction}>
           <motion.div 
             key={weekOffset} 
@@ -105,7 +118,7 @@ export default function WeeklyPlanner() {
               x: { type: "spring", stiffness: 200, damping: 25 },
               opacity: { duration: 0.2 }
             }}
-            className="grid grid-cols-7 grid-rows-1 h-full gap-[clamp(1.0rem,2.5vw,3rem)] w-full absolute inset-0 content-start pl-2 pr-2"
+            className="grid grid-cols-1 md:grid-cols-7 gap-6 md:gap-[clamp(1rem,2.5vw,3rem)] w-full lg:absolute lg:inset-0 "
           >
             {weekDays.map((day) => {
               const isSelected = selectedDay === day.key;
@@ -114,13 +127,13 @@ export default function WeeklyPlanner() {
                 <div 
                   key={day.key} 
                   onClick={() => setSelectedDay(day.key)}
-                  className={`relative flex flex-col border rounded-lg p-2 items-center w-full h-auto cursor-pointer transition-all ${
+                  className={`relative flex flex-row md:flex-col border rounded-lg p-2 items-center w-full h-35 md:h-auto cursor-pointer transition-all ${
                     isSelected 
                       ? "border-primaryPurple ring-1 ring-primaryPurple/20" 
                       : "border-white/15 hover:border-white/30"
                   }`}
                 >
-                  <div className='h-[10vh] flex flex-col justify-center items-center w-full'>
+                  <div className='h-[10vh] flex flex-col justify-center items-center  w-32 md:w-full'>
                     <h3 className={`text-sm ${isSelected ? "text-primaryPurple" : "text-gray-400"}`}>
                       {day.label}
                     </h3>
@@ -131,33 +144,34 @@ export default function WeeklyPlanner() {
                       {day.isToday && <div className="w-1.5 h-1.5 bg-primaryPurple rounded-full"></div>}
                     </div>
                   </div>
-                  <div className="activities-list overflow-y-auto w-full flex flex-col items-center gap-2 mb-4">
+                  <div className="activities-list overflow-y-auto w-full flex flex-row md:flex-col items-center gap-4 md:gap-2 md:mb-4">
                     {activities.length > cardLimit ? (
                       <>
-                        {activities.slice(0, cardLimit).map((act) => (
-                          <ActivityCardReduced key={act.id} {...act} />
-                        ))}
+                        {activities.slice(0, cardLimit).map((act) => {
+                          return isMobile ? (
+                            <ActivityCard key={act.id} {...act} />
+                          ) : (
+                            <ActivityCardReduced key={act.id} {...act} />
+                          );
+                        })}
+                        
                         <Popover>
                           <PopoverTrigger asChild>
-                            <div className="h-15 w-[clamp(6.25rem,8vw,8rem)] py-2 border border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center bg-white/5 hover:bg-white/10 transition-colors cursor-pointer shrink-0">
+                            <div className="h-25 md:h-15 w-26 md:w-[clamp(6.25rem,8vw,8rem)] py-2 border border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center bg-white/5 hover:bg-white/10 transition-colors cursor-pointer shrink-0">
                               <span className="text-white font-bold text-sm">
                                 {activities.length - cardLimit}+
                               </span>
                               <span className="text-gray-400 text-[10px] uppercase">mais</span>
                             </div>
                           </PopoverTrigger>
-                          
                           <PopoverContent 
                             side="right"           
                             align="bottom"
-                            className="w-41 p-2 bg-primaryBackground border-white/20 p-2 shadow-2xl"
+                            className="w-40 p-6 md:p-4 bg-primaryBackground border-white/20 shadow-2xl flex flex-col gap-3"
                           >
-                            <div className="flex flex-col gap-2 max-h-[300px] overflow-y-auto p-2 custom-scrollbar">
-                              <p className="text-[10px] text-zinc-500 uppercase font-bold mb-1 px-1">Restante do dia</p>
-                              {activities.slice(cardLimit).map((act) => (
-                                <ActivityCard key={act.id} {...act} />
-                              ))}
-                            </div>
+                            {activities.slice(cardLimit).map((act) => (
+                              <ActivityCard key={act.id} {...act} />
+                            ))}
                           </PopoverContent>
                         </Popover>
                       </>
@@ -176,8 +190,8 @@ export default function WeeklyPlanner() {
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className='flex flex-row w-full h-[20vh] justify-between shrink-0 '>
-        <div className="h-full w-[44vw] border-white/10 rounded-xl border p-5 flex">
+      <div className='flex flex-col md:flex-row w-full  justify-between flex-shrink-0 gap-4 mb-6'>
+        <div className="h-full w-full md:w-[44vw] border-white/10 rounded-xl border p-5 flex">
           <div className='w-[75%] flex flex-col gap-2'>
             <p className="text-white font-medium mb- shrink-0">Resumo - {weekDays.find(d => d.key === selectedDay)?.label} {weekDays.find(d => d.key === selectedDay)?.displayDate}</p>
             <div className='flex justify-between gap-6 tracking-tight truncate w-full items-start px-2'>
@@ -203,7 +217,7 @@ export default function WeeklyPlanner() {
           </div>
         </div>
 
-        <div className="h-full w-[44vw] border-white/10 rounded-xl border p-5 flex">
+        <div className="h-full w-full md:w-[44vw] border-white/10 rounded-xl border p-5 flex">
           <div className='w-[75%] flex flex-col gap-2'>
             <p className="text-white font-medium truncate">Resumo da Semana</p>
             <div className='flex justify-between gap-6 items-start px-2 tracking-tight truncate w-full'>

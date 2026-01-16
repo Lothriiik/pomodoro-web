@@ -2,15 +2,19 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import HomeLayout from "@/layouts/HomeLayout/HomeLayout"
 import Login from "@/pages/Login"
 import Cadastro from "@/pages/Cadastro"
+import { Toaster } from "sonner"
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/home/pomodoro" />} />
-      <Route path="/login" element={<Login />}/>
-      <Route path="/cadastro" element={<Cadastro/>}/>
+    <>
+      <Toaster position="bottom-right" richColors theme="dark" />
 
-      <Route path="/home/*" element={<HomeLayout />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Navigate to="/home/pomodoro" />} />
+        <Route path="/login" element={<Login />}/>
+        <Route path="/cadastro" element={<Cadastro/>}/>
+        <Route path="/home/*" element={<HomeLayout />} />
+      </Routes>
+    </>
   )
 }

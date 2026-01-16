@@ -56,61 +56,61 @@ export default function DetailsProjects() {
 
   return (
     <TooltipProvider delayDuration={100}>
-      <div className="flex flex-col h-screen gap-6 overflow-hidden">
-        <header className="h-[10vh] mt-10 flex items-center gap-4">
+      <div className="flex flex-col min-h-screen lg:overflow-hidden lg:h-screen gap-8 md:gap-4 justify-between">
+        <header className="mt-8 sm:mt-10 flex items-center gap-4 md:pb-6">
           <Button variant="ghost" size="icon" className="hover:bg-white/10 text-white">
             <ArrowLeft className="w-6 h-6 text-white" />
           </Button>
-          <div className='h-full'>
-            <h1 className='text-white text-2xl font-bold tracking-tight truncate'>Estudos React</h1>
-            <div className="text-gray-400 text-sm tracking-tight truncate">Curso Completo de React com projetos práticos</div>
+          <div className='h-full justify-center flex flex-col items-start'>
+            <h1 className='text-white text-xl sm:text-2xl font-bold tracking-tight truncate'>Estudos React</h1>
+            <h1 className="text-gray-400 text-xs sm:text-sm tracking-tight truncate">Curso Completo de React com projetos práticos</h1>
           </div>
         </header>
 
-        <div className="flex-1 min-h-0 gap-6 flex flex-col pb-6">
-          <div className='flex w-full gap-4 h-[35%]'>
-            <div className='border-white/10 rounded-xl border p-5 w-[70%] flex flex-col justify-between h-full'>
+        <div className="flex-1 flex flex-col gap-6 px-4 md:px-0 min-h-0">
+          <div className='flex flex-col md:flex-row w-full gap-4 md:h-[30%] shrink-0'>
+            <div className='border-white/10 rounded-xl border p-5 w-full md:w-[70%] flex flex-col justify-between h-full'>
               <div>
                 <p className="text-white font-medium truncate">Progresso Geral</p>
               </div>
 
-              <div className='flex justify-between gap-6 w-full items-start px-2'>
-                
+              <div className=' grid grid-cols-2 mt-2 md:flex justify-between w-full items-center px-2 gap-2'>
+    
                 <div className='flex-1 flex flex-col items-start min-w-0'>
                   <div className="flex items-center gap-2">
-                    <p className="text-white font-bold text-[clamp(1.2rem,1.5vw,1.75rem)] tracking-tight">32</p>
+                    <p className="text-white font-bold text-base md:text-2xl tracking-tight">32</p>
                   </div>
                   <div className="flex items-center gap-1.5 mt-1 text-gray-500">
-                    <p className="text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight font-medium">Sessões</p>
+                    <p className="text-xs md:text-sm tracking-tight font-medium">Sessões</p>
                   </div>
                 </div>
 
-                <div className='flex-1 flex flex-col items-start min-w-0 pl-6'>
+                <div className='flex-1 flex flex-col items-start min-w-0 md:pl-6'>
                   <div className="flex items-center gap-2">
-                    <p className="text-white font-bold text-[clamp(1.2rem,1.5vw,1.75rem)] tracking-tight">13h 20m</p>
+                    <p className="text-white font-bold text-base md:text-2xl tracking-tight">13h 20m</p>
                   </div>
-                  <p className="text-gray-400 text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight mt-1 font-medium pl-1">Tempo Total</p>
+                  <p className="text-gray-400 text-xs md:text-sm  tracking-tight mt-1 font-medium pl-1">Tempo Total</p>
                 </div>
 
-                <div className='flex-1 flex flex-col items-start min-w-0 pl-6 relative group'>
+                <div className='flex-1 flex flex-col items-start min-w-0 md:pl-6 relative group'>
                   <div className="flex items-center gap-2">
-                    <p className="text-white font-bold text-[clamp(1.2rem,1.5vw,1.75rem)] tracking-tight">32</p>
-                    {32 >= 13 && <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />} 
-                  </div>
-                  <div className="flex items-center gap-1.5 mt-1 text-primaryPurple/50">
-                    <Target className="w-3.5 h-3.5 shrink-0" />
-                    <p className="text-gray-400 text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight font-medium">Meta Sessões</p>
-                  </div>
-                </div>
-
-                <div className='flex-1 flex flex-col items-start min-w-0 pl-6'>
-                  <div className="flex items-center gap-2">
-                    <p className="text-white font-bold text-[clamp(1.2rem,1.5vw,1.75rem)] tracking-tight">13h 20m</p>
+                    <p className="text-white font-bold text-base md:text-2xl tracking-tight">32</p>
                     <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
                   </div>
                   <div className="flex items-center gap-1.5 mt-1 text-primaryPurple/50">
+                    <p className="text-gray-400 text-xs md:text-sm  tracking-tight font-medium">Meta Sessões</p>
                     <Target className="w-3.5 h-3.5 shrink-0" />
-                    <p className="text-gray-400 text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight font-medium">Meta Tempo</p>
+                  </div>
+                </div>
+
+                <div className='flex-1 flex flex-col items-start min-w-0 md:pl-6'>
+                  <div className="flex items-center gap-2">
+                    <p className="text-white font-bold text-base md:text-2xl tracking-tight">13h 20m</p>
+                    <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                  </div>
+                  <div className="flex items-center gap-1.5 mt-1 text-primaryPurple/50">
+                    <p className="text-gray-400 text-xs md:text-sm  tracking-tight font-medium">Meta Tempo</p>
+                    <Target className="w-3.5 h-3.5 shrink-0" />
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function DetailsProjects() {
                 </div>
               </div>
             </div>
-            <div className='border-white/10 rounded-xl border p-5 w-[30%] flex flex-col h-full overflow-hidden'>
+            <div className='border-white/10 rounded-xl border p-5 w-full md:w-[30%] flex flex-col h-full overflow-hidden'>
               <p className="text-white font-medium mb-2 shrink-0">Informações</p>
               <div className="flex-1 flex flex-col justify-between py-2">
                 <div className="flex justify-between  items-center w-full px-2">
@@ -171,8 +171,8 @@ export default function DetailsProjects() {
             </div>
           </div>
 
-          <div className="flex w-full gap-4 h-[55%]">
-            <div className='border-white/10 rounded-xl border p-5 w-[70%] flex flex-col'>
+          <div className="flex flex-col md:flex-row w-full gap-4 md:h-[60%] min-h-0">
+            <div className='border-white/10 rounded-xl border p-5 w-full md:w-[70%] flex flex-col h-[350px] md:h-full  '>
               <div className='flex items-center justify-between mb-6'>
                 <p className="text-white font-medium">Atividade do Projeto</p>
                 
@@ -200,7 +200,7 @@ export default function DetailsProjects() {
                 </div>
               </div>
 
-              <div className="flex-1 h-0 w-full min-h-0 items-center justify-center border border-dashed border-white/5 rounded-lg overflow-hidden">
+              <div className="flex-1 min-h-0 w-full border border-dashed border-white/5 rounded-lg overflow-hidden relative">
                 <AnimatePresence mode="wait">
                   {view === "semanal" ? (
                     <motion.div
@@ -279,7 +279,7 @@ export default function DetailsProjects() {
                 </AnimatePresence>
               </div>
             </div>
-            <div className=' border-white/10 rounded-xl border p-5 w-[30%] flex flex-col h-full overflow-hidden'>
+            <div className=' border-white/10 rounded-xl border p-5 w-full mb-8 md:w-[30%] flex flex-col h-full overflow-hidden'>
               <div className="flex items-center justify-between mb-6 shrink-0">
                 <p className="text-white font-medium">Tarefas</p>
                 <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">

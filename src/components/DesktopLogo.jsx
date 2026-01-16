@@ -4,10 +4,10 @@ export default function DesktopLogo() {
   return (
     <Link to="/" className="flex items-center gap-1">
       <img
-        src="/logo.png"
+        src="/ampulheta-pretavermelho.png"
         alt="Ampulheta"
-        width={120}
-        height={30}
+        width={40}
+        height={40}
       />
     </Link>
   );

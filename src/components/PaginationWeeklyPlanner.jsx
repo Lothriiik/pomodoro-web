@@ -33,7 +33,7 @@ export function PaginationWeeklyPlanner({ weekOffset, onChange }) {
           />
         </PaginationItem>
 
-        <PaginationItem className="min-w-[150px] text-center font-medium">
+        <PaginationItem className="min-w-[150px] text-center text-sm md:text-base font-medium">
           {currentLabel}
         </PaginationItem>
 

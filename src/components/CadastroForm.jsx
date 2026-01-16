@@ -69,8 +69,10 @@ export default function CadastroForm({ isMobile = false }) {
 
       await new Promise((resolve) => setTimeout(resolve, 2000));
       
-      toast.success("Cadastro realizado com sucesso!");
-      
+      toast.success("Cadastro realizado com sucesso!", {
+        className:
+          "bg-primaryBackground text-primaryGreen border border-primaryGreen",
+      })
 
       setTimeout(() => {
         navigate("/login");
@@ -86,31 +88,31 @@ export default function CadastroForm({ isMobile = false }) {
 
   const renderFields = () => (
     <>
-      <div className="relative space-y-1">
+      <div className="relative space-y-2">
         <Label htmlFor="nome">Nome Completo</Label>
         <Input
           id="nome"
           value={form.nome}
           onChange={handleChange}
           placeholder="Como você será identificado."
-          className={errors.nome ? "border-red-500" : ""}
+          className={errors.nome ? "border-red-500" : "bg-primaryBackground border-white/15 text-white focus-visible:ring-primaryPurple h-10"}
         />
         {errors.nome && <InputErrorTooltip message={errors.nome} />}
       </div>
 
-      <div className="relative space-y-1">
+      <div className="relative space-y-2">
         <Label htmlFor="empresa">Empresa</Label>
         <Input
           id="empresa"
           value={form.empresa}
           onChange={handleChange}
           placeholder="Nome da sua empresa."
-          className={errors.empresa ? "border-red-500" : ""}
+          className={errors.empresa ? "border-red-500" : "bg-primaryBackground border-white/15 text-white focus-visible:ring-primaryPurple h-10"}
         />
         {errors.empresa && <InputErrorTooltip message={errors.empresa} />}
       </div>
 
-      <div className="relative space-y-1">
+      <div className="relative space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"
@@ -118,12 +120,12 @@ export default function CadastroForm({ isMobile = false }) {
           value={form.email}
           onChange={handleChange}
           placeholder="exemplo@email.com"
-          className={errors.email ? "border-red-500" : ""}
+          className={errors.email ? "border-red-500" : "bg-primaryBackground border-white/15 text-white focus-visible:ring-primaryPurple h-10"}
         />
         {errors.email && <InputErrorTooltip message={errors.email} />}
       </div>
 
-      <div className="relative space-y-1">
+      <div className="relative space-y-2">
         <Label htmlFor="senha">Senha</Label>
         <div className="relative">
           <Input
@@ -132,7 +134,7 @@ export default function CadastroForm({ isMobile = false }) {
             value={form.senha}
             onChange={handleChange}
             placeholder="Mínimo 6 caracteres"
-            className={errors.senha ? "border-red-500" : ""}
+            className={errors.senha ? "border-red-500" : "bg-primaryBackground border-white/15 text-white focus-visible:ring-primaryPurple h-10"}
           />
           <button
             type="button"
@@ -145,7 +147,7 @@ export default function CadastroForm({ isMobile = false }) {
         {errors.senha && <InputErrorTooltip message={errors.senha} />}
       </div>
 
-      <div className="relative space-y-1">
+      <div className="relative space-y-2">
         <Label htmlFor="confirmarSenha">Confirmar Senha</Label>
         <div className="relative">
           <Input
@@ -153,7 +155,8 @@ export default function CadastroForm({ isMobile = false }) {
             type={showConfirmPassword ? "text" : "password"}
             value={form.confirmarSenha}
             onChange={handleChange}
-            className={errors.confirmarSenha ? "border-red-500" : ""}
+            placeholder="Confirme a senha"
+            className={errors.confirmarSenha ? "border-red-500" : "bg-primaryBackground border-white/15 text-white focus-visible:ring-primaryPurple h-10"}
           />
           <button
             type="button"
@@ -168,15 +171,45 @@ export default function CadastroForm({ isMobile = false }) {
     </>
   );
 
+
+if (isMobile) {
+    return (
+      <form noValidate onSubmit={handleSubmit} className="space-y-4">
+        {renderFields()}
+
+        <Button 
+          type="submit" 
+          variant="roxo"
+          size="full"
+          disabled={isFormIncomplete || isLoading}
+        >
+          {isLoading ? "Criando conta..." : "CRIAR CONTA"}
+        </Button>
+
+        <div className="text-center text-sm text-zinc-400">
+          Já tem uma conta?{" "}
+          <Link to="/login" className="text-indigo-400 hover:underline">
+            Entrar
+          </Link>
+        </div>
+      </form>
+    );
+  }
+
+  // 🖥 desktop
   return (
-    <Card className={`w-full max-w-md bg-primaryBackground border-white/10 ${isMobile ? 'border-0 shadow-none' : ''}`}>
+    <Card className="w-full max-w-md rounded-2xl bg-primaryBackground">
       <CardHeader>
-        <CardTitle className="text-2xl text-white">Cadastro</CardTitle>
+        <CardTitle className="text-3xl text-white">Cadastro</CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {renderFields()}
-          
+        <form
+          noValidate
+          onSubmit={handleSubmit}
+          className="space-y-4 flex flex-col items-center"
+        >
+          <div className="w-[95%] space-y-4">{renderFields()}</div>
+
           <Button 
             type="submit" 
             variant="roxo"

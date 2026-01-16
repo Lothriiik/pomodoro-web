@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from 'sonner';
 import {
   Card,
   CardContent,
@@ -13,6 +14,7 @@ import {
 import { InputErrorTooltip } from "./InputError";
 
 export default function LoginForm({ isMobile = false }) {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -59,6 +61,11 @@ export default function LoginForm({ isMobile = false }) {
     setIsLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1500));
+      toast.success("Bem-vindo de volta!");
+      setTimeout(() => {
+        navigate("/home/pomodoro");
+      }, 2000);
+
     } catch (error) {
       console.error("Erro ao fazer login:", error);
     } finally {
@@ -74,6 +81,7 @@ export default function LoginForm({ isMobile = false }) {
           id="email"
           type="email"
           placeholder="Insira seu email cadastrado"
+          className="bg-primaryBackground border-white/15 text-white focus-visible:ring-primaryPurple h-10" 
           value={form.email}
           onChange={handleChange}
           hasError={!!errors.email}
@@ -81,30 +89,27 @@ export default function LoginForm({ isMobile = false }) {
         {errors.email && <InputErrorTooltip message={errors.email} />}
       </div>
 
-      <div className="space-y-2 relative">
+      <div className="space-y-2"> 
         <Label htmlFor="senha">Senha</Label>
-        <div className="relative">
+        <div className="relative w-full">
           <Input
             id="senha"
             type={showPassword ? "text" : "password"}
             placeholder="Insira sua senha"
+
+            className="bg-primaryBackground border-white/15 text-white focus-visible:ring-primaryPurple h-10 w-full pr-12" 
             value={form.senha}
             onChange={handleChange}
             hasError={!!errors.senha}
           />
-          <Button
+          <button
             type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute right-0 top-0 h-full px-3 py-2"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? (
-              <EyeOff className="h-5 w-5" />
-            ) : (
-              <Eye className="h-5 w-5" />
-            )}
-          </Button>
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+          
           {errors.senha && <InputErrorTooltip message={errors.senha} />}
         </div>
       </div>
@@ -128,6 +133,8 @@ export default function LoginForm({ isMobile = false }) {
 
         <Button
           type="submit"
+          variant="roxo"
+          size="full"
           disabled={isFormIncomplete || isLoading}
           isLoading={isLoading}
         >

@@ -123,7 +123,7 @@ export default function Timer() {
 
 
   return (
-    <div className="flex flex-col justify-between w-[430px] h-[420px]">
+    <div className="flex flex-col justify-between h-[350px] w-[360px] md:w-[430px] md:h-[420px]">
       <div className="flex justify-between">
         {Object.entries(MODES).map(([key, value]) => (
           <Button
@@ -139,7 +139,7 @@ export default function Timer() {
       </div>
 
       <div className="flex justify-center">
-        <p className="text-white font-extrabold text-8xl">
+        <p className="text-white font-extrabold text-7xl md:text-8xl">
           {formatTime(time)}
         </p>
       </div>
@@ -172,7 +172,7 @@ export default function Timer() {
         </div>
 
       <div className="flex justify-center">
-        <p className="text-gray-default">Sem sessões hoje</p>
+        <p className="text-gray-default text-sm md:text-md">Sem sessões hoje</p>
       </div>
       {finished && (
         <div className="text-center text-white font-semibold">
