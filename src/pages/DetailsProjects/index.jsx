@@ -304,7 +304,7 @@ export default function DetailsProjects() {
                         className={cn(
                           "w-5 h-5 rounded-md border flex items-center justify-center transition-all",
                           task.completed
-                            ? "bg-green-500/20 border-green-500 text-green-500"
+                            ? "bg-primaryGreen/40 border-primaryGreen text-primaryGreen"
                             : "border-white/10 bg-transparent text-transparent"
                         )}
                       >
