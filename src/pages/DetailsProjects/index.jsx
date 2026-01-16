@@ -109,7 +109,7 @@ export default function DetailsProjects() {
                     <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
                   </div>
                   <div className="flex items-center gap-1.5 mt-1 text-primaryPurple/50">
-                    <p className="text-gray-400 text-xs md:text-sm  tracking-tight font-medium">Meta Tempo</p>
+                    <p className="text-gray-400 text-xs md:text-sm tracking-tight font-medium">Meta Tempo</p>
                     <Target className="w-3.5 h-3.5 shrink-0" />
                   </div>
                 </div>

@@ -127,7 +127,7 @@ export default function WeeklyPlanner() {
                 <div 
                   key={day.key} 
                   onClick={() => setSelectedDay(day.key)}
-                  className={`relative flex flex-row md:flex-col border rounded-lg p-2 items-center w-full h-35 md:h-auto cursor-pointer transition-all ${
+                  className={`relative flex flex-row md:flex-col border rounded-lg p-2 items-center w-full h-33 md:h-auto cursor-pointer transition-all ${
                     isSelected 
                       ? "border-primaryPurple ring-1 ring-primaryPurple/20" 
                       : "border-white/15 hover:border-white/30"
@@ -190,23 +190,23 @@ export default function WeeklyPlanner() {
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className='flex flex-col md:flex-row w-full  justify-between flex-shrink-0 gap-4 mb-6'>
+      <div className='flex flex-col md:flex-row w-full  justify-between flex-shrink-0 gap-4 mb-12'>
         <div className="h-full w-full md:w-[44vw] border-white/10 rounded-xl border p-5 flex">
           <div className='w-[75%] flex flex-col gap-2'>
             <p className="text-white font-medium mb- shrink-0">Resumo - {weekDays.find(d => d.key === selectedDay)?.label} {weekDays.find(d => d.key === selectedDay)?.displayDate}</p>
             <div className='flex justify-between gap-6 tracking-tight truncate w-full items-start px-2'>
               <div className='flex-1 flex flex-col items-start min-w-0'>
-                <p className="text-white font-bold text-[clamp(1.2rem,1.5vw,1.75rem)] tracking-tight">20h 20m</p>
+                <p className="text-white font-bold text-base md:text-2xl tracking-tight">20h 20m</p>
                 <div className="flex items-center gap-1.5 mt-1 text-gray-400">
-                  <p className="text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight ">Tempo Focado</p>
+                  <p className="text-xs md:text-sm  tracking-tight ">Tempo Focado</p>
                 </div>
               </div>
               <div className='flex-1 flex flex-col items-start min-w-0 pl-6'>
                 <div className="flex items-center gap-1">
-                  <p className="text-white font-bold text-[clamp(1.2rem,1.5vw,1.75rem)] tracking-tight">5 / 20</p>
+                  <p className="text-white font-bold text-base md:text-2xl tracking-tight">5 / 20</p>
                 </div>
                 <div className="flex items-center gap-1.5 mt-1 ">
-                  <p className="text-gray-400 text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight font-medium">Concluídas</p>
+                  <p className="text-gray-400 text-xs md:text-sm  tracking-tight font-medium">Concluídas</p>
                 </div>
               </div>
             </div>
@@ -222,17 +222,17 @@ export default function WeeklyPlanner() {
             <p className="text-white font-medium truncate">Resumo da Semana</p>
             <div className='flex justify-between gap-6 items-start px-2 tracking-tight truncate w-full'>
               <div className='flex-1 flex flex-col items-start min-w-0'>
-                <p className="text-white font-bold text-[clamp(1.2rem,1.5vw,1.75rem)] ">20h 20m</p>
+                <p className="text-white font-bold text-base md:text-2xl">20h 20m</p>
                 <div className="flex items-center gap-1.5 mt-1 text-gray-500">
-                  <p className="text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight font-medium">Tempo Focado</p>
+                  <p className="text-xs md:text-sm  tracking-tight font-medium">Tempo Focado</p>
                 </div>
               </div>
               <div className='flex-1 flex flex-col items-start min-w-0 pl-6'>
                 <div className="flex items-center gap-2">
-                  <p className="text-white font-bold text-[clamp(1.2rem,1.5vw,1.75rem)] tracking-tight tracking-wider truncate">5 / 20</p>
+                  <p className="text-white font-bold text-base md:text-2xl tracking-tight truncate">5 / 20</p>
                 </div>
                 <div className="flex items-center gap-1.5 mt-1 text-primaryPurple/50">
-                  <p className="text-gray-400 text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight font-medium tracking-wider truncate">Atividades</p>
+                  <p className="text-gray-400 text-xs md:text-sm tracking-tight font-medium tracking-wider truncate">Atividades</p>
                 </div>
               </div>
             </div>

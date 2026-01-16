@@ -19,6 +19,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {
+  Plus
+} from "lucide-react"
 
 export function ModalAddActivity({ day }) {
   return (
@@ -26,9 +29,9 @@ export function ModalAddActivity({ day }) {
       <DialogTrigger asChild  >
         <button
           onClick={(e) => e.stopPropagation()} 
-          className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primaryBackground rounded-full flex items-center justify-center border border-primaryPurple hover:scale-110 transition-transform shadow-lg z-10"
+          className="absolute md:-bottom-4 -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 md:w-8 md:h-8 bg-primaryBackground rounded-full flex items-center justify-center border border-primaryPurple hover:scale-110 transition-transform shadow-lg z-10"
         >
-          <span className="text-primaryPurple text-xl ">+</span>
+          <Plus className="text-primaryPurple" size={16}></Plus>
         </button>
       </DialogTrigger>
 
