@@ -22,7 +22,7 @@ export function PaginationWeeklyPlanner({ weekOffset, onChange }) {
 
   return (
     <Pagination className="text-white select-none">
-      <PaginationContent className="gap-4">
+      <PaginationContent className="gap-0 md:gap-4">
         <PaginationItem>
           <PaginationPrevious 
             onClick={() => weekOffset > -2 && onChange(weekOffset - 1)}

@@ -97,16 +97,16 @@ export default function Projects() {
           <div className="bg-primaryPurple/35 h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 rounded-lg flex justify-center items-center ">
             <FolderOpen className="text-primaryPurple" size={24}/>
           </div>
-          <div className="ml-4 tracking-tight truncate w-full">
+          <div className="ml-0 md:ml-4 tracking-tight truncate w-full">
             <p className="text-white text-base md:text-xl  font-bold tracking-tight truncate w-full">12</p>
-            <p className="text-gray-300 text-xs md:text-sm tracking-tight truncate w-full">Total de Projetos</p>
+            <p className="text-gray-300 text-xs md:text-sm tracking-tight truncate w-full">Projetos</p>
           </div>
         </div>
         <div className="flex border-white/15 rounded-lg border p-3 sm:p-4 items-center gap-2 sm:gap-3">
           <div className="bg-primaryBlue/35 h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 rounded-lg flex justify-center items-center">
             <AlarmClock className="text-primaryBlue" size={24}/>
           </div>
-          <div className="ml-4 tracking-tight truncate w-full">
+          <div className="ml-0 md:ml-4 tracking-tight truncate w-full">
             <p className="text-white text-base md:text-xl font-bold tracking-tight truncate w-full">180h 25m</p>
             <p className="text-gray-300 text-xs md:text-sm tracking-tight truncate w-full">Tempo Total</p>
           </div>
@@ -115,7 +115,7 @@ export default function Projects() {
           <div className="bg-primaryOrange/35 h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 rounded-lg flex justify-center items-center">
             <TrendingUp className="text-primaryOrange" size={24}/>
           </div>
-          <div className="ml-4 tracking-tight truncate w-full">
+          <div className="ml-0 md:ml-4 tracking-tight truncate w-full">
             <p className="text-white text-base md:text-xl font-bold tracking-tight truncate w-full">240</p>
             <p className="text-gray-300 text-xs md:text-sm tracking-tight truncate w-full">Sessões</p>
           </div>
@@ -124,7 +124,7 @@ export default function Projects() {
           <div className="bg-primaryGreen/35 h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 rounded-lg flex justify-center items-center">
             <Check className="text-primaryGreen " size={24}/>
           </div>
-          <div className="ml-4 tracking-tight truncate w-full">
+          <div className="ml-0 md:ml-4 tracking-tight truncate w-full">
             <p className="text-white text-base md:text-xl font-bold tracking-tight truncate w-full">1</p>
             <p className="text-gray-300 text-xs md:text-sm tracking-tight truncate w-full">Concluidos</p>
           </div>

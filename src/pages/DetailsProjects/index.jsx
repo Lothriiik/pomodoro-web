@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { RadialProgress } from '../../components/RadialProgress';
 import { ArrowLeft, BarChart3, History, Target, CheckCircle2, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
@@ -56,18 +56,21 @@ export default function DetailsProjects() {
 
   return (
     <TooltipProvider delayDuration={100}>
-      <div className="flex flex-col min-h-screen lg:overflow-hidden lg:h-screen gap-8 md:gap-4 justify-between">
+      <div className="flex flex-col min-h-screen lg:overflow-hidden lg:h-screen gap-8  md:gap-2 ">
         <header className="mt-8 sm:mt-10 flex items-center gap-4 md:pb-6">
-          <Button variant="ghost" size="icon" className="hover:bg-white/10 text-white">
-            <ArrowLeft className="w-6 h-6 text-white" />
-          </Button>
-          <div className='h-full justify-center flex flex-col items-start'>
+          <Link to="/home/projetos">
+            <Button variant="ghost" size="icon" className="hover:bg-white/10 text-white">
+              <ArrowLeft className="w-6 h-6 text-white" />
+            </Button>
+          </Link>
+          
+          <div className='h-full justify-center flex flex-col items-start w-full'>
             <h1 className='text-white text-xl sm:text-2xl font-bold tracking-tight truncate'>Estudos React</h1>
-            <h1 className="text-gray-400 text-xs sm:text-sm tracking-tight truncate">Curso Completo de React com projetos práticos</h1>
+            <h1 className="text-gray-400 text-xs sm:text-sm tracking-tight">Curso Completo de React com projetos práticos</h1>
           </div>
         </header>
 
-        <div className="flex-1 flex flex-col gap-6 px-4 md:px-0 min-h-0">
+        <div className="flex-1 flex flex-col gap-6 min-h-0">
           <div className='flex flex-col md:flex-row w-full gap-4 md:h-[30%] shrink-0'>
             <div className='border-white/10 rounded-xl border p-5 w-full md:w-[70%] flex flex-col justify-between h-full'>
               <div>
@@ -172,7 +175,7 @@ export default function DetailsProjects() {
           </div>
 
           <div className="flex flex-col md:flex-row w-full gap-4 md:h-[60%] min-h-0">
-            <div className='border-white/10 rounded-xl border p-5 w-full md:w-[70%] flex flex-col h-[350px] md:h-full  '>
+            <div className='border-white/10 rounded-xl border p-5 w-full md:w-[70%] flex flex-col h-[300px] md:h-full  '>
               <div className='flex items-center justify-between mb-6'>
                 <p className="text-white font-medium">Atividade do Projeto</p>
                 
@@ -239,7 +242,7 @@ export default function DetailsProjects() {
                             dataKey="hours" 
                             fill="#9D8BFF" 
                             radius={[4, 4, 0, 0]} 
-                            barSize={30}
+                            barSize={60}
                           />
                         </BarChart>
                       </ResponsiveContainer>

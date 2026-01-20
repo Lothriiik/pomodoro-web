@@ -33,8 +33,6 @@ export function RadialProgress({ value, size = 96, stroke = 8 }) {
           {value}%
         </span>
       </div>
-
-      <span className="text-gray-400 text-[clamp(0.7rem,0.9vw,0.875rem)] tracking-tight truncate">Aproveitamento</span>
     </div>
   );
 }

@@ -13,7 +13,7 @@ import {
   SidebarFooter,
   SidebarContent,
   SidebarTrigger,
-  useSidebar, // Importado para acessar o estado 'open'
+  useSidebar,
 } from "@/components/ui/sidebar"
 
 import {
@@ -31,6 +31,7 @@ import DetailsProjects from "../../pages/DetailsProjects"
 import NotFound from "../../pages/NotFound"
 import Unauthorized from "../../pages/Unauthorized"
 import NewProjects from "../../pages/NewProjects"
+import Dashboard from "../../pages/Dashboard"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -59,8 +60,8 @@ function LogoTrigger() {
           key={isOpen ? "open" : "closed"}
           src={isOpen ? "/ampulheta-roxa.png" : "/ampulheta-cinza.png"}
           alt="Logo"
-          width={20}
-          height={20}
+          width={24}
+          height={24}
           animate={{ rotate: 360 }}
           transition={{ duration: 0.5 }}
         />
@@ -76,16 +77,15 @@ export default function HomeLayout() {
 
   return (
     <SidebarProvider open={open} onOpenChange={setOpen}>
-      <div className="flex min-h-screen w-full bg-primaryBackground flex-col md:flex-row">
-        
-        <header className="flex h-12 items-center justify-between px-4 border-b border-white/10 md:hidden bg-primaryBackground shrink-0">
-          <div className="flex items-center gap-3">
+      <div className="flex min-h-dvh w-full bg-primaryBackground flex-col md:flex-row">
+        <header className="fixed top-0 left-0 right-0 z-50 flex h-14 items-center justify-between px-4 border-b border-white/10 md:hidden bg-primaryBackground shrink-0">
+          <div className="flex items-center gap-3 ml-4">
              <LogoTrigger />
           </div>
         </header>
 
         <Sidebar collapsible="icon">
-          <SidebarHeader className="hidden md:flex items-center justify-center p-2">
+          <SidebarHeader className="flex items-center justify-center p-2">
             <LogoTrigger />
           </SidebarHeader>
 
@@ -176,7 +176,7 @@ export default function HomeLayout() {
           </SidebarFooter>
         </Sidebar>
 
-        <main className="flex-1 px-4 md:px-12 overflow-x-hidden custom-scrollbar">
+        <main className="flex-1 px-10 md:px-12 pt-12 md:pt-0 overflow-x-hidden custom-scrollbar">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -193,6 +193,7 @@ export default function HomeLayout() {
                 <Route path="detalhes-projeto" element={<DetailsProjects />} />
                 <Route path="notfound" element={<Unauthorized />} />
                 <Route path="novo-projeto" element={<NewProjects />} />
+                <Route path="dashboard" element={<Dashboard />} />
                 <Route path="/" element={<Navigate to="pomodoro" replace />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

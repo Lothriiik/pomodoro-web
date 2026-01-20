@@ -51,7 +51,7 @@ function DateInputPicker({ label }) {
               readOnly
               value={date ? format(date, "dd / MM / yyyy") : ""}
               placeholder="dd / mm / aaaa"
-              className="border-white/10 h-[clamp(2.5rem,4vw,3rem)] text-gray-300 text-sm md:text-md pr-10"
+              className="border-white/10 h-11 text-gray-300 text-sm md:text-md pr-10"
             />
             <CalendarIcon
               size={18}
@@ -77,16 +77,16 @@ function DateInputPicker({ label }) {
 export default function NewProjects() {
   const [selectedColor, setSelectedColor] = useState("purple")
   return (
-    <div className="flex flex-col min-h-screen w-full gap-2 md:gap-0 mx-auto text-white overflow-y-auto">
+    <div className="flex flex-col min-h-screen w-full md:gap-0 mx-auto text-white overflow-y-auto">
       
-      <header className="h-[9vh] mt-10 flex justify-between items-center ">
+      <header className="h-[9vh] mt-10 flex justify-between md-0 md:mb-4  items-center ">
         <div className='h-full'>
-          <h1 className='text-white text-2xl font-bold tracking-tight truncate'>Novo Projeto</h1>
-          <p className="text-gray-300 text-sm tracking-tight truncate">Gerencie seus projetos e acompanhe o progresso</p>
+          <h1 className='text-white text-xl sm:text-2xl font-bold tracking-tight truncate'>Novo Projeto</h1>
+          <p className="text-gray-300 text-xs sm:text-sm tracking-tight truncate">Gerencie seus projetos e acompanhe o progresso</p>
         </div>
       </header>
 
-      <div className="flex flex-col gap-4 md:gap-24 md:h-[72vh] p-2 md:flex-row">
+      <div className="flex flex-col gap-4 md:gap-24 md:h-[70vh] md:flex-row">
         <div className="w-[100%] gap-4 md:gap-0  md:justify-between flex flex-col h-full md:w-[50%]">
           <div className="gap-2 flex flex-col md:h-[19%]">
             <label className="text-sm font-normal text-white">Nome do Projeto</label>
@@ -101,11 +101,11 @@ export default function NewProjects() {
           <div className="flex justify-between md:h-[20%]">
             <div className=" w-[45%] gap-2 flex flex-col">
               <label className="text-sm font-normal text-white">Metas de Sessões</label>
-              <Input type="number" placeholder="50" className="bg-transparent border-white/20 h-11 text-sm md:text-md" />
+              <Input type="number" placeholder="Ex: 50" className="bg-transparent border-white/20 h-11 text-sm md:text-md" />
             </div>
             <div className="w-[45%] gap-2 flex flex-col ">
               <label className="text-sm font-normal text-white">Metas de Horas</label>
-              <Input type="number" placeholder="40" className="bg-transparent border-white/20 h-11 text-sm md:text-md" />
+              <Input type="number" placeholder="Ex: 40" className="bg-transparent border-white/20 h-11 text-sm md:text-md" />
             </div>
           </div>
 

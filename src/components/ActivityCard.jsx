@@ -51,13 +51,13 @@ export const ActivityCard = ({ time, title, tag, cycles, color }) => {
   const theme = getTheme(color);
 
   return (
-    <div className={`flex flex-col justify-between p-3 md:mb-2 rounded-lg border border-white/5 ${theme.background} h-25 md:h-[clamp(5rem,17vh,7rem)] w-26 md:w-[clamp(6.25rem,8vw,16rem)] shrink-0 transition-all hover:brightness-110`}>
+    <div className={`flex flex-col justify-between p-3 md:mb-2 rounded-lg border border-white/5 ${theme.background} h-23 md:h-[clamp(5rem,17vh,7rem)] w-22 md:w-[clamp(6.25rem,8vw,16rem)] shrink-0 transition-all hover:brightness-110`}>
       <div className="flex items-center gap-1.5">
         <div className={`w-2 h-2 rounded-full ${theme.dot}`} />
         <span className={`text-[9px] md:text-xs ${theme.time}`}>{time}</span>
       </div>
       
-      <h4 className="text-white text-xs md:text-sm font-medium leading-tight line-clamp-2">
+      <h4 className="text-white text-[10px] md:text-sm font-medium leading-tight line-clamp-2">
         {title}
       </h4>
       

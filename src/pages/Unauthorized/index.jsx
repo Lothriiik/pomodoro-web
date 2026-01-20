@@ -11,12 +11,12 @@ export default function Unauthorized() {
   const navigate = useNavigate()
   
   return (
-    <div className="min-h-screen bg-primaryBackground flex items-center justify-center p-6 font-sans">
+    <div className="min-h-screen bg-primaryBackground flex items-center justify-center ">
       <div className="max-w-xl w-full text-center space-y-8">
         
         <div className="flex items-center justify-center flex-col gap-8">
-          <LockKeyhole className="text-primaryPurple w-25 h-25"/>
-          <h1 className="text-[80px] md:text-white font-bold text-white/5 leading-none select-none">
+          <LockKeyhole className="text-primaryPurple w-20 md:w-25 h-20 md:h-25"/>
+          <h1 className="text-6xl md:text-[80px] md:text-white font-bold text-white/5 leading-none select-none">
             403
           </h1>
         </div>

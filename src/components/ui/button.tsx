@@ -19,7 +19,7 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 text-gray-default",
         link: "text-primary underline-offset-4 hover:underline",
         roxo: "bg-primaryPurple hover:bg-primaryPurpleHover text-primaryBackground font-semibold",
         letraAzul: "bg-transparent hover:bg-primaryBlue hover:text-primaryBackground text-primaryBlue font-semibold",

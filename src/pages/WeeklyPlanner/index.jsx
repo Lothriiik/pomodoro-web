@@ -127,7 +127,7 @@ export default function WeeklyPlanner() {
                 <div 
                   key={day.key} 
                   onClick={() => setSelectedDay(day.key)}
-                  className={`relative flex flex-row md:flex-col border rounded-lg p-2 items-center w-full h-33 md:h-auto cursor-pointer transition-all ${
+                  className={`relative flex flex-row md:flex-col border rounded-lg p-2 items-center w-full h-31 md:h-auto cursor-pointer transition-all ${
                     isSelected 
                       ? "border-primaryPurple ring-1 ring-primaryPurple/20" 
                       : "border-white/15 hover:border-white/30"
@@ -157,7 +157,7 @@ export default function WeeklyPlanner() {
                         
                         <Popover>
                           <PopoverTrigger asChild>
-                            <div className="h-25 md:h-15 w-26 md:w-[clamp(6.25rem,8vw,8rem)] py-2 border border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center bg-white/5 hover:bg-white/10 transition-colors cursor-pointer shrink-0">
+                            <div className="h-23 md:h-15 w-16 md:w-[clamp(6.25rem,8vw,8rem)] py-2 border border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center bg-white/5 hover:bg-white/10 transition-colors cursor-pointer shrink-0">
                               <span className="text-white font-bold text-sm">
                                 {activities.length - cardLimit}+
                               </span>
@@ -167,7 +167,7 @@ export default function WeeklyPlanner() {
                           <PopoverContent 
                             side="right"           
                             align="bottom"
-                            className="w-40 p-6 md:p-4 bg-primaryBackground border-white/20 shadow-2xl flex flex-col gap-3"
+                            className="w-30 md:w-40 p-4 md:p-4 bg-primaryBackground border-white/20 shadow-2xl flex flex-col gap-3"
                           >
                             {activities.slice(cardLimit).map((act) => (
                               <ActivityCard key={act.id} {...act} />
