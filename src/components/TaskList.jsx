@@ -21,7 +21,6 @@ export default function ListaTarefas() {
             className="group flex items-center justify-between p-4 bg-[#1a1d24]/50 border border-white/5 rounded-xl hover:border-primaryPurple/30 transition-all cursor-pointer"
           >
             <div className="flex items-center gap-4">
-              {/* Custom Checkbox */}
               <div
                 className={cn(
                   "w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all",

@@ -1,10 +1,11 @@
 import { useState, useEffect, React } from 'react';
 import { Textarea } from "@/components/ui/textarea"
-import { Calendar as CalendarIcon, Plus} from "lucide-react"
+import { Calendar as CalendarIcon, Plus, Pencil, Trash2 } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import { Button } from "@/components/ui/button"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { Input } from "@/components/ui/input"
+import { ModalAddNewProjectTask } from "@/components/ModalAddNewProjectTask"
 import { cn } from "@/lib/utils";
 import {
   Popover,
@@ -25,8 +26,8 @@ const projectColors = [
 ]
 
 const PriorityItem = ({ value, label, color }) => (
-  <ToggleGroupItem 
-    value={value} 
+  <ToggleGroupItem
+    value={value}
     style={{ "--prio-color": color }}
     className="md:h-[clamp(2.0rem,4vw,3rem)] flex justify-start gap-3 px-4 rounded-xl border border-white/10  data-[state=on]:border-[var(--prio-color)] transition-all w-full"
   >
@@ -73,12 +74,29 @@ function DateInputPicker({ label }) {
   )
 }
 
-
 export default function NewProjects() {
   const [selectedColor, setSelectedColor] = useState("purple")
+  const [initialTasks, setInitialTasks] = useState([])
+
+  const handleSaveTask = (taskToSave) => {
+    setInitialTasks(prev => {
+      const exists = prev.some(t => t.id === taskToSave.id);
+      if (exists) {
+        return prev.map(t => t.id === taskToSave.id ? taskToSave : t);
+      }
+      return [...prev, {
+        ...taskToSave,
+        id: Date.now(), 
+      }];
+    })
+  }
+
+  const handleDeleteTask = (taskId) => {
+    setInitialTasks(prev => prev.filter(t => t.id !== taskId));
+  }
   return (
     <div className="flex flex-col min-h-screen w-full md:gap-0 mx-auto text-white overflow-y-auto">
-      
+
       <header className="h-[9vh] mt-10 flex justify-between md-0 md:mb-4  items-center ">
         <div className='h-full'>
           <h1 className='text-white text-xl sm:text-2xl font-bold tracking-tight truncate'>Novo Projeto</h1>
@@ -111,9 +129,9 @@ export default function NewProjects() {
 
           <div className="flex flex-col gap-3 md:h-[30%] ">
             <span className="text-sm font-normal text-white">Cor do Projeto</span>
-            <ToggleGroup 
-              type="single" 
-              value={selectedColor} 
+            <ToggleGroup
+              type="single"
+              value={selectedColor}
               onValueChange={(val) => val && setSelectedColor(val)}
               className="grid grid-cols-4 gap-2 md:gap-6 flex-1"
             >
@@ -126,9 +144,9 @@ export default function NewProjects() {
                               hover:border-[var(--active-color)] 
                               data-[state=on]:border-[var(--active-color)] "
                 >
-                  <div 
-                    className="h-4 w-full rounded-full" 
-                    style={{ backgroundColor: color.var }} 
+                  <div
+                    className="h-4 w-full rounded-full"
+                    style={{ backgroundColor: color.var }}
                   />
                 </ToggleGroupItem>
               ))}
@@ -148,38 +166,73 @@ export default function NewProjects() {
           </div>
 
           <div className="gap-2 flex justify-between md:h-[19%]">
-             <DateInputPicker label="Data de Início" />
-             <DateInputPicker label="Data de Entrega" />
+            <DateInputPicker label="Data de Início" />
+            <DateInputPicker label="Data de Entrega" />
           </div>
 
-          <div className="md:h-[49%] flex flex-col gap-4">
+          <div className="md:h-[49%] h-60 flex flex-col gap-4">
             <div className="flex justify-between items-center">
               <label className="text-sm font-normal text-white">Tarefas Iniciais</label>
-              <Button variant="brancoBordas" size="add" className="size-8 rounded-full border-white/10 bg-white/5"><Plus/></Button>
+
+              <ModalAddNewProjectTask
+                onSave={handleSaveTask}
+                trigger={
+                  <Button variant="brancoBordas" size="add" className="size-8 rounded-full border-white/10 bg-white/5"><Plus /></Button>
+                }
+              />
             </div>
 
-            <div className="flex-1 min-h-0 overflow-y-auto rounded-xl border border-white/10 custom-scrollbar">
-              <div className="flex flex-col ">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={i} className="flex tracking-tight truncate w-full shrink-0 items-center justify-between p-3 hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <input type="checkbox" className="w-4 h-4 rounded accent-primaryPurple" />
-                      <span className="text-sm text-gray-400">Tarefa de exemplo {i}</span>
+            <div className={`flex-1 min-h-0 overflow-y-auto rounded-xl border border-white/10 custom-scrollbar ${initialTasks.length === 0 ? 'flex items-center justify-center' : ''}`}>
+              {initialTasks.length === 0 ? (
+                <div className="text-center p-4">
+                  <p className="text-sm text-gray-500">Nenhuma tarefa inicial</p>
+                  <p className="text-xs text-gray-600 mt-1">Adicione tarefas base para o projeto</p>
+                </div>
+              ) : (
+                <div className="flex flex-col w-full">
+                  {initialTasks.map((task) => (
+                    <div key={task.id} className="flex tracking-tight truncate w-full shrink-0 items-center justify-between p-3 hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors group">
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm text-gray-400">{task.title}</span>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <ModalAddNewProjectTask
+                            taskToEdit={task}
+                            onSave={handleSaveTask}
+                            trigger={
+                              <button className="p-1.5 hover:bg-white/10 rounded-md text-gray-400 hover:text-white transition-colors">
+                                <Pencil size={14} />
+                              </button>
+                            }
+                          />
+                          <button
+                            onClick={() => handleDeleteTask(task.id)}
+                            className="p-1.5 hover:bg-white/10 rounded-md text-gray-400 hover:text-red-400 transition-colors"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                        <div className="flex flex-col items-end">
+                          <span className="text-[11px] font-mono text-gray-500">{task.time}</span>
+                          {task.date && <span className="text-[10px] text-gray-600">{format(task.date, "dd/MM")}</span>}
+                        </div>
+                      </div>
                     </div>
-                    <span className="text-[11px] font-mono text-gray-500">02:30h</span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      <footer className="flex justify-end gap-4 mt-2 p-2 mb-4">
-        <Button variant="cancelar" >
+      <footer className="flex justify-end gap-4 mt-2 p-2 mb-8 md:mb-0 w-full">
+        <Button variant="cancelar" size="mobile" onClick={() => navigate("/home/projetos")}>
           Cancelar
         </Button>
-        <Button variant="roxo" >
+        <Button variant="roxo" size="mobile" onClick={() => navigate("/home/projetos")}>
           Criar Projeto
         </Button>
       </footer>

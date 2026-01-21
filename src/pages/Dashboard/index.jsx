@@ -204,23 +204,25 @@ export default function Dashboard() {
           <h1 className='text-white text-xl sm:text-2xl font-bold tracking-tight truncate'>Dashboard</h1>
           <p className="text-gray-300 text-xs sm:text-sm tracking-tight ">Acompanhe seu progresso e produtividade</p>
         </div>
-
-        <div className="p-1 rounded-lg flex items-center gap-1 border border-white/10 self-start md:self-auto">
-          {['Hoje', 'Semana', 'Mês'].map((range) => (
-            <button
-              key={range}
-              onClick={() => setTimeRange(range.toLowerCase())}
-              className={cn(
-                "px-3 py-1.5 rounded-md text-xs font-medium transition-all",
-                timeRange === range.toLowerCase()
-                  ? "text-white bg-primaryPurple  shadow-sm border border-white/5"
-                  : "text-gray-400 hover:text-white"
-              )}
-            >
-              {range}
-            </button>
-          ))}
+        <div className="flex-1 md:flex w-full md:w-none md:justify-end justify-center">
+          <div className="p-1 rounded-lg flex items-center gap-1 border border-white/10 self-start md:self-auto  ">
+            {['Hoje', 'Semana', 'Mês'].map((range) => (
+              <button
+                key={range}
+                onClick={() => setTimeRange(range.toLowerCase())}
+                className={cn(
+                  "px-3 py-1.5 rounded-md text-xs w-full md:w-auto font-medium transition-all",
+                  timeRange === range.toLowerCase()
+                    ? "text-white bg-primaryPurple  shadow-sm border border-white/5"
+                    : "text-gray-400 hover:text-white"
+                )}
+              >
+                {range}
+              </button>
+            ))}
+          </div>
         </div>
+        
       </header>
       <div className="flex-1 gap-4 md:gap-8 flex flex-col">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-8 ">

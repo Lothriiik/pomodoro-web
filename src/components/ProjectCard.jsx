@@ -2,8 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
 
-export function ProjectCard({ 
-  title, description, progress, sessions, totalTime, tasks, status, date, color 
+export function ProjectCard({
+  id, title, description, progress, sessions, totalTime, tasks, status, date, endDate, color
 }) {
   const colorMap = {
     purple: "bg-primaryPurple",
@@ -16,15 +16,15 @@ export function ProjectCard({
   };
 
   return (
-    <Link to="/home/detalhes-projeto" className="block w-full h-full group">
+    <Link to={`/home/detalhes-projeto/${id}`} className="block w-full h-full group">
       <div className="flex flex-row md:flex-col w-full h-full border-white/15 rounded-lg border p-4 sm:p-5 lg:p-6 bg-primaryBackground gap-4 md:gap-3 justify-between hover:border-primaryPurple hover:bg-white/[0.02] transition-all cursor-pointer">
-        
+
         <div className="flex flex-col flex-1 min-w-0 md:flex-none">
           <div className="flex justify-between items-start gap-2">
             <h3 className="text-white text-sm md:text-base lg:text-lg font-bold truncate transition-colors flex-1">{title}</h3>
             <div className={`hidden md:block w-3 h-3 flex-shrink-0 rounded-full ${colorMap[color] || "bg-white"} shadow-[0_0_8px_rgba(255,255,255,0.1)] mt-1`} />
           </div>
-          
+
           <p className="hidden md:block text-gray-400 text-xs md:text-sm mt-1 leading-snug line-clamp-3 h-[3.5rem] overflow-hidden">
             {description}
           </p>
@@ -42,7 +42,7 @@ export function ProjectCard({
           <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 border-b-0 md:border-b border-white/5 pb-0 md:pb-4 w-full">
             <StatItem label="Sessões" value={sessions} />
             <StatItem label="Tempo" value={totalTime} />
-            <StatItem label="Tarefas" value={tasks} />
+            <StatItem label="Tarefas" value={Array.isArray(tasks) ? `${tasks.filter(t => t.completed).length}/${tasks.length}` : tasks} />
           </div>
 
           <div className="flex  md:flex-row justify-between items-center md:items-center gap-2 w-full">
@@ -51,7 +51,7 @@ export function ProjectCard({
                 {status}
               </Badge>
             </div>
-            <span className="text-gray-500 text-[9px] md:text-[11px] font-medium order-1 md:order-2">{date}</span>
+            <span className="text-gray-500 text-[9px] md:text-[11px] font-medium order-1 md:order-2">{date || endDate}</span>
           </div>
         </div>
       </div>

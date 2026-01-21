@@ -33,19 +33,20 @@ const buttonVariants = cva(
         amarelo: "bg-primaryYellow hover:bg-primaryellowHover text-primaryBackground font-semibold",
         cinza: "bg-transparent hover:bg-primaryPurple hover:text-primaryBackground text-gray-default font-semibold",
         brancoBordas: "bg-transparent hover:border-primaryPurple hover:text-primaryPurple text-gray-default border-white/15 border",
-        calendarycolor:"bg-transparent hover:bg-primaryPurple hover:text-primaryBackground text-gray-default focus:bg-primaryPurple focus:text-primaryBackground",
+        calendarycolor: "bg-transparent hover:bg-primaryPurple hover:text-primaryBackground text-gray-default focus:bg-primaryPurple focus:text-primaryBackground",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        fixedsm: "h-8 w-[80px] rounded-md",
+        fixedsm: "h-8 w-[70px] rounded-md text-xs md:text-sm",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        padrao: "h-10 rounded-md px-10 has-[>svg]:px-4 md:w-[120px] w-[100px]",
-        xg: "h-10 md:w-[140px] w-[110px]  rounded-md",
-        full:"h-10 w-full rounded-md",
+        padrao: "h-10 rounded-md px-4 md:px-10 has-[>svg]:px-4 md:w-[120px] w-full max-w-[100px] text-xs md:text-sm",
+        xg: "h-10 md:w-[140px] w-full  md:max-w-[120px] max-w-[95px] text-xs md:text-sm rounded-md",
+        full: "h-10 w-full rounded-md",
         add: "size-8 rounded-full",
-        icon:'size-8',
+        icon: 'size-8',
         iconbutton: "size-10 rounded-full",
+        mobile: "h-9 md:w-[140px] w-[48%] md:max-w-[120px] text-xs md:text-sm rounded-md",
       },
     },
     defaultVariants: {
@@ -67,7 +68,7 @@ const hoverClasses: Record<string, string> = {
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   isLoading?: boolean
   asChild?: boolean
 }

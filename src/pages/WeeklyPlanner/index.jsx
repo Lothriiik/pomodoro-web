@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { ActivityCard, ActivityCardReduced } from '../../components/ActivityCard';
 import { PaginationWeeklyPlanner } from '../../components/PaginationWeeklyPlanner';
-import { MOCK_DATA } from '../../mocks/mockData'; 
+import { MOCK_DATA } from '../../mocks/weeklyPlannerMock';
+import { PROJECTS_MOCK } from '../../mocks/projectsMock';
 import { RadialProgress } from '../../components/RadialProgress';
 import { ModalAddActivity } from '../../components/ModalAddActivity';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from "react-router-dom";
-
 import {
   Popover,
   PopoverContent,
@@ -34,7 +34,7 @@ export default function WeeklyPlanner() {
       zIndex: 1,
       x: 0,
       opacity: 1,
-      
+
     },
     exit: (direction) => ({
       zIndex: 0,
@@ -69,13 +69,13 @@ export default function WeeklyPlanner() {
     return labels.map((key, i) => {
       const date = new Date();
       date.setDate(now.getDate() + diffToMonday + (offset * 7) + i);
-      
+
       return {
         key: key,
         label: fullLabels[i],
         displayDate: date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })
-                         .replace(' de ', ' ') 
-                         .replace('.', ''),
+          .replace(' de ', ' ')
+          .replace('.', ''),
         isToday: date.toDateString() === new Date().toDateString()
       };
     });
@@ -84,6 +84,21 @@ export default function WeeklyPlanner() {
   const weekDays = getWeekDays(weekOffset);
   const todayKey = weekDays.find(d => d.isToday)?.key || "seg";
   const [selectedDay, setSelectedDay] = useState(todayKey);
+
+  const resolveActivity = (activity) => {
+    const project = PROJECTS_MOCK.find(p => p.id === activity.projectId);
+    if (!project) return activity; // fallback if data missing
+
+    const task = project.tasks.find(t => t.id === activity.taskId);
+
+    return {
+      ...activity,
+      title: task ? task.title : "Tarefa desconhecida",
+      tag: project.priority, // Using priority as tag
+      cycles: task ? task.cycles : 1, // Default to 1 if missing
+      color: project.color,
+    };
+  };
 
   return (
     <div className="flex flex-col min-h-screen lg:overflow-hidden lg:h-screen gap-6 md:gap-6 justify-between ">
@@ -98,17 +113,17 @@ export default function WeeklyPlanner() {
         </div>
 
         <div className="flex-shrink-0">
-          <PaginationWeeklyPlanner 
-            weekOffset={weekOffset} 
-            onChange={handleWeekChange} 
+          <PaginationWeeklyPlanner
+            weekOffset={weekOffset}
+            onChange={handleWeekChange}
           />
         </div>
       </header>
-      
+
       <div className="relative w-full h-auto lg:h-[50vh] min-h-[40vh] shrink-0">
         <AnimatePresence mode="popLayout" custom={direction}>
-          <motion.div 
-            key={weekOffset} 
+          <motion.div
+            key={weekOffset}
             custom={direction}
             variants={variants}
             initial="enter"
@@ -122,16 +137,16 @@ export default function WeeklyPlanner() {
           >
             {weekDays.map((day) => {
               const isSelected = selectedDay === day.key;
-              const activities = MOCK_DATA[`${weekOffset}-${day.key}`] || [];
+              const rawActivities = MOCK_DATA[`${weekOffset}-${day.key}`] || [];
+              const activities = rawActivities.map(resolveActivity); // Resolve data
               return (
-                <div 
-                  key={day.key} 
+                <div
+                  key={day.key}
                   onClick={() => setSelectedDay(day.key)}
-                  className={`relative flex flex-row md:flex-col border rounded-lg p-2 items-center w-full h-31 md:h-auto cursor-pointer transition-all ${
-                    isSelected 
-                      ? "border-primaryPurple ring-1 ring-primaryPurple/20" 
-                      : "border-white/15 hover:border-white/30"
-                  }`}
+                  className={`relative flex flex-row md:flex-col border rounded-lg p-2 items-center w-full h-31 md:h-auto cursor-pointer transition-all ${isSelected
+                    ? "border-primaryPurple ring-1 ring-primaryPurple/20"
+                    : "border-white/15 hover:border-white/30"
+                    }`}
                 >
                   <div className='h-[10vh] flex flex-col justify-center items-center  w-32 md:w-full'>
                     <h3 className={`text-sm ${isSelected ? "text-primaryPurple" : "text-gray-400"}`}>
@@ -154,7 +169,7 @@ export default function WeeklyPlanner() {
                             <ActivityCardReduced key={act.id} {...act} />
                           );
                         })}
-                        
+
                         <Popover>
                           <PopoverTrigger asChild>
                             <div className="h-23 md:h-15 w-16 md:w-[clamp(6.25rem,8vw,8rem)] py-2 border border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center bg-white/5 hover:bg-white/10 transition-colors cursor-pointer shrink-0">
@@ -164,8 +179,8 @@ export default function WeeklyPlanner() {
                               <span className="text-gray-400 text-[10px] uppercase">mais</span>
                             </div>
                           </PopoverTrigger>
-                          <PopoverContent 
-                            side="right"           
+                          <PopoverContent
+                            side="right"
                             align="bottom"
                             className="w-30 md:w-40 p-4 md:p-4 bg-primaryBackground border-white/20 shadow-2xl flex flex-col gap-3"
                           >
