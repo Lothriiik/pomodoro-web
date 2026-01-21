@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import HomeLayout from "@/layouts/HomeLayout/HomeLayout"
-import Login from "@/pages/Login"
-import Cadastro from "@/pages/Cadastro"
+import Login from "@/pages/Login/index.jsx"
+import Cadastro from "@/pages/Cadastro/index.jsx"
 import { Toaster } from "sonner"
 
 export default function App() {
