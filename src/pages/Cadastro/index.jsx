@@ -1,8 +1,7 @@
+import { useEffect } from "react";
 import CadastroForm from "@/components/CadastroForm"
 import DesktopLogo from "@/components/DesktopLogo"
 import MobileLogo from "@/components/MobileLogo"
-
-
 
 export default function Cadastro() {
   useEffect(() => {
