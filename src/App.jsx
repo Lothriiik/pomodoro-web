@@ -12,7 +12,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />}/>
-        <Route path="/cadastro" element={<Cadastro/>}/>
+        <Route path="/cadastro" element={<Cadastro />}/>
         <Route path="/home/*" element={<HomeLayout />} />
         <Route path="/*" element={<Navigate to="/login" />} />
       </Routes>
