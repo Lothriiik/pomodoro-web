@@ -1,11 +1,11 @@
-import { useState, useEffect, React } from 'react';
+import { useState } from 'react';
 import { Textarea } from "@/components/ui/textarea"
 import { Calendar as CalendarIcon, Plus, Pencil, Trash2 } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import { Button } from "@/components/ui/button"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { Input } from "@/components/ui/input"
-import { ModalAddNewProjectTask } from "@/components/ModalAddNewProjectTask"
+import { ActivityModal } from "@/components/common/ActivityModal"
 import { cn } from "@/lib/utils";
 import {
   Popover,
@@ -13,6 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { format } from "date-fns"
+import { useNavigate } from 'react-router-dom';
 
 const projectColors = [
   { id: "purple", var: "var(--color-primaryPurple)" },
@@ -75,6 +76,7 @@ function DateInputPicker({ label }) {
 }
 
 export default function NewProjects() {
+  const navigate = useNavigate();
   const [selectedColor, setSelectedColor] = useState("purple")
   const [initialTasks, setInitialTasks] = useState([])
 
@@ -86,7 +88,7 @@ export default function NewProjects() {
       }
       return [...prev, {
         ...taskToSave,
-        id: Date.now(), 
+        id: Date.now(),
       }];
     })
   }
@@ -174,8 +176,10 @@ export default function NewProjects() {
             <div className="flex justify-between items-center">
               <label className="text-sm font-normal text-white">Tarefas Iniciais</label>
 
-              <ModalAddNewProjectTask
+              <ActivityModal
                 onSave={handleSaveTask}
+                hideProjectSelect={true}
+                enableDateSelect={true}
                 trigger={
                   <Button variant="brancoBordas" size="add" className="size-8 rounded-full border-white/10 bg-white/5"><Plus /></Button>
                 }
@@ -198,9 +202,11 @@ export default function NewProjects() {
 
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <ModalAddNewProjectTask
-                            taskToEdit={task}
+                          <ActivityModal
+                            task={task}
                             onSave={handleSaveTask}
+                            hideProjectSelect={true}
+                            enableDateSelect={true}
                             trigger={
                               <button className="p-1.5 hover:bg-white/10 rounded-md text-gray-400 hover:text-white transition-colors">
                                 <Pencil size={14} />

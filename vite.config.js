@@ -11,7 +11,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       devOptions: {
-        enabled: true, 
+        enabled: true,
       },
       manifest: {
         name: "Pomodoro Web",
@@ -41,5 +41,11 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.js',
+    css: true,
   },
 })

@@ -5,7 +5,8 @@ export const MOCK_DATA = {
   ],
   "0-ter": [
     { id: 102, projectId: 2, taskId: 1, time: "09:00" },
-    { id: 103, projectId: 1, taskId: 2, time: "14:00" }
+    { id: 103, projectId: 1, taskId: 2, time: "14:00" },
+    { id: 104, projectId: 2, taskId: 2, time: "19:00" },
   ],
   "0-qui": [
     { id: 105, projectId: 1, taskId: 3, time: "08:00" }

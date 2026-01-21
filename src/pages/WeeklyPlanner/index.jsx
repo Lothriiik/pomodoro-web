@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { ActivityCard, ActivityCardReduced } from '../../components/ActivityCard';
-import { PaginationWeeklyPlanner } from '../../components/PaginationWeeklyPlanner';
+import { PaginationWeeklyPlanner } from '../../components/features/Planner/PaginationWeeklyPlanner';
 import { MOCK_DATA } from '../../mocks/weeklyPlannerMock';
 import { PROJECTS_MOCK } from '../../mocks/projectsMock';
-import { RadialProgress } from '../../components/RadialProgress';
-import { ModalAddActivity } from '../../components/ModalAddActivity';
+import { RadialProgress } from '../../components/common/RadialProgress';
+import { ActivityModal } from '../../components/common/ActivityModal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from "react-router-dom";
 import {
@@ -81,11 +81,14 @@ export default function WeeklyPlanner() {
     });
   };
 
-  const weekDays = getWeekDays(weekOffset);
+  const weekDays = useMemo(() => {
+    return getWeekDays(weekOffset);
+  }, [weekOffset]);
+
   const todayKey = weekDays.find(d => d.isToday)?.key || "seg";
   const [selectedDay, setSelectedDay] = useState(todayKey);
 
-  const resolveActivity = (activity) => {
+  const resolveActivity = useCallback((activity) => {
     const project = PROJECTS_MOCK.find(p => p.id === activity.projectId);
     if (!project) return activity; // fallback if data missing
 
@@ -98,7 +101,7 @@ export default function WeeklyPlanner() {
       cycles: task ? task.cycles : 1, // Default to 1 if missing
       color: project.color,
     };
-  };
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen lg:overflow-hidden lg:h-screen gap-6 md:gap-6 justify-between ">
@@ -197,7 +200,7 @@ export default function WeeklyPlanner() {
                     )}
                   </div>
                   {isSelected && (
-                    <ModalAddActivity day={`${day.label} ${day.displayDate}`} />
+                    <ActivityModal defaultDate={`${day.label} ${day.displayDate}`} />
                   )}
                 </div>
               );

@@ -32,7 +32,7 @@ import NotFound from "@/pages/NotFound"
 import Unauthorized from "@/pages/Unauthorized"
 import NewProjects from "@/pages/NewProjects"
 import Dashboard from "@/pages/Dashboard"
-import { UserProfileModal } from "@/components/UserProfileModal.jsx"
+import { UserProfileModal } from "@/components/features/UserProfile/UserProfileModal.jsx"
 import { Button } from "@/components/ui/button"
 import {
   AlarmClock,

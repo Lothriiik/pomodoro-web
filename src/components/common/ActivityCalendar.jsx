@@ -200,37 +200,15 @@ export function ActivityCalendar() {
                                 {calendarGrid.map((week, weekIndex) => (
                                     <div key={weekIndex} className="flex flex-col gap-[3px]">
                                         {week.map((day, dayIndex) => (
-                                            <Tooltip key={`${weekIndex}-${dayIndex}`}>
-                                                <TooltipTrigger asChild>
-                                                    <div
-                                                        className={cn(
-                                                            "w-4 h-4 rounded-sm transition-colors duration-200 cursor-pointer flex-shrink-0",
-                                                            day ? getFillColor(day.count) : "bg-neutral-900"
-                                                        )}
-                                                        style={{ pointerEvents: day ? "auto" : "none" }}
-                                                        title={day?.date}
-                                                    />
-                                                </TooltipTrigger>
-                                                <TooltipContent side="top" className="bg-primaryBackground border border-white/10 text-white">
-                                                    <p>
-                                                        {day ? (
-                                                            <>
-                                                                <strong>{day.count} contribuições</strong> em{" "}
-                                                                {parseDateLocal(day.date).toLocaleDateString(
-                                                                    "pt-BR",
-                                                                    {
-                                                                        year: "numeric",
-                                                                        month: "long",
-                                                                        day: "numeric",
-                                                                    }
-                                                                )}
-                                                            </>
-                                                        ) : (
-                                                            "Nenhuma contribuição"
-                                                        )}
-                                                    </p>
-                                                </TooltipContent>
-                                            </Tooltip>
+                                            <div
+                                                key={`${weekIndex}-${dayIndex}`}
+                                                className={cn(
+                                                    "w-4 h-4 rounded-sm transition-colors duration-200 cursor-pointer flex-shrink-0",
+                                                    day ? getFillColor(day.count) : "bg-neutral-900"
+                                                )}
+                                                style={{ pointerEvents: day ? "auto" : "none" }}
+                                                title={day ? `${day.count} contribuições em ${parseDateLocal(day.date).toLocaleDateString("pt-BR", { year: "numeric", month: "long", day: "numeric" })}` : ""}
+                                            />
                                         ))}
                                     </div>
                                 ))}

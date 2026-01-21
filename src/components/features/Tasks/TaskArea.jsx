@@ -1,16 +1,15 @@
-import { useState } from "react";
-import { Button } from "./ui/button";
-import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia } from "./ui/empty";
+import { useState, useMemo } from "react";
+import { Button } from "@/components/ui/button";
+import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia } from "@/components/ui/empty";
 import { ClipboardList, ChevronLeft, ChevronRight, Calendar as CalendarIcon, Check, Play, Pencil, Trash2, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Calendar } from "./ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, addDays, subDays, isSameDay } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { ModalAddActivity } from "./ModalAddActivity";
-import { ModalEditActivity } from "./ModalEditActivity";
+import { ActivityModal } from "../../common/ActivityModal";
 
-import { TASKS_MOCK } from "../mocks/tasksMock";
+import { TASKS_MOCK } from "../../../mocks/tasksMock";
 
 export default function TaskArea({ activeTaskId, onPlayTask }) {
     const [filterType, setFilterType] = useState('pending');
@@ -29,7 +28,7 @@ export default function TaskArea({ activeTaskId, onPlayTask }) {
             title: newTask.title || "Nova Tarefa",
             completed: false,
             date: selectedDate,
-            ...newTask 
+            ...newTask
         }]);
     };
 
@@ -48,11 +47,13 @@ export default function TaskArea({ activeTaskId, onPlayTask }) {
         setTasks(prev => prev.filter(t => t.id !== taskId));
     };
 
-    const filteredTasks = tasks.filter(task => {
-        const matchesDate = isSameDay(new Date(task.date), selectedDate);
-        const matchesStatus = filterType === 'pending' ? !task.completed : task.completed;
-        return matchesDate && matchesStatus;
-    });
+    const filteredTasks = useMemo(() => {
+        return tasks.filter(task => {
+            const matchesDate = isSameDay(new Date(task.date), selectedDate);
+            const matchesStatus = filterType === 'pending' ? !task.completed : task.completed;
+            return matchesDate && matchesStatus;
+        });
+    }, [tasks, selectedDate, filterType]);
 
     return (
         <div className="flex flex-col bg-primaryBackground rounded-lg border border-white/10 h-[280px] w-full md:w-[430px] md:h-full overflow-hidden mt-8 md:mt-0">
@@ -180,8 +181,8 @@ export default function TaskArea({ activeTaskId, onPlayTask }) {
 
                 {filterType === 'pending' && filteredTasks.length > 0 && (
                     <div className="mt-4">
-                        <ModalAddActivity
-                            day={selectedDate}
+                        <ActivityModal
+                            defaultDate={selectedDate}
                             onSave={handleAddTask}
                             trigger={
                                 <button className="w-full py-3 border-2 border-dashed border-white/10 rounded-lg text-gray-400 text-sm hover:border-white/30 hover:text-white transition-all flex items-center justify-center gap-2 group">
@@ -213,8 +214,8 @@ export default function TaskArea({ activeTaskId, onPlayTask }) {
                             </EmptyHeader>
                             {filterType === 'pending' && (
                                 <EmptyContent>
-                                    <ModalAddActivity
-                                        day={selectedDate}
+                                    <ActivityModal
+                                        defaultDate={selectedDate}
                                         onSave={handleAddTask}
                                         trigger={
                                             <Button variant="roxo" size="sm">
@@ -229,11 +230,12 @@ export default function TaskArea({ activeTaskId, onPlayTask }) {
                 )}
             </div>
 
-            <ModalEditActivity
+            <ActivityModal
                 task={editingTask}
                 open={!!editingTask}
                 onOpenChange={(open) => !open && setEditingTask(null)}
                 onSave={handleSaveEditedTask}
+                showDefaultTrigger={false}
             />
         </div>
     );

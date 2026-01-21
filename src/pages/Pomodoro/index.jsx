@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
-import Timer from "@/components/Timer"
-import TaskArea from "@/components/TaskArea"
+import Timer from "@/components/common/Timer"
+import TaskArea from "@/components/features/Tasks/TaskArea"
 
 export default function Pomodoro() {
   const [activeTaskId, setActiveTaskId] = useState(null);

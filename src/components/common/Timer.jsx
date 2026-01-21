@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from "react";
-import { Button } from "./ui/button";
-import { TIMER_MODES as STATIC_TIMER_MODES } from "../mocks/timerMock";
-import { USERS_MOCK, CURRENT_USER_ID } from "../mocks/userMock";
+import { Button } from "@/components/ui/button";
+import { TIMER_MODES as STATIC_TIMER_MODES } from "@/mocks/timerMock";
+import { USERS_MOCK, CURRENT_USER_ID } from "@/mocks/userMock";
 
 function playBeep(type = "foco") {
   const ctx = new (window.AudioContext || window.webkitAudioContext)();

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import LoginForm from "@/components/LoginForm";
-import DesktopLogo from "@/components/DesktopLogo";
-import MobileLogo from "@/components/MobileLogo";
+import LoginForm from "@/components/features/Auth/LoginForm";
+import DesktopLogo from "@/components/layout/DesktopLogo";
+import MobileLogo from "@/components/layout/MobileLogo";
 
 export default function Login() {
   useEffect(() => {

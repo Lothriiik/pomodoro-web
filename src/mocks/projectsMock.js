@@ -19,6 +19,15 @@ export const PROJECTS_MOCK = [
       { id: 3, title: "Design system", time: "2h 30m", completed: false, cycles: 3 },
       { id: 4, title: "Protótipo Interativo", time: "2h 30m", completed: false, cycles: 5 },
       { id: 5, title: "Testes de usabilidade", time: "2h 30m", completed: false, cycles: 2 },
+    ],
+    weeklyData: [
+      { day: 'Seg', hours: 4 },
+      { day: 'Ter', hours: 6 },
+      { day: 'Qua', hours: 3 },
+      { day: 'Qui', hours: 8 },
+      { day: 'Sex', hours: 5 },
+      { day: 'Sáb', hours: 2 },
+      { day: 'Dom', hours: 0 },
     ]
   },
   {
@@ -39,6 +48,15 @@ export const PROJECTS_MOCK = [
       { id: 1, title: "Instalação do Go", time: "1h 00m", completed: true, cycles: 2 },
       { id: 2, title: "Sintaxe Básica", time: "4h 00m", completed: true, cycles: 6 },
       { id: 3, title: "Goroutines", time: "2h 30m", completed: false, cycles: 4 },
+    ],
+    weeklyData: [
+      { day: 'Seg', hours: 2 },
+      { day: 'Ter', hours: 4 },
+      { day: 'Qua', hours: 1 },
+      { day: 'Qui', hours: 5 },
+      { day: 'Sex', hours: 3 },
+      { day: 'Sáb', hours: 0 },
+      { day: 'Dom', hours: 2 },
     ]
   },
   {
@@ -55,7 +73,16 @@ export const PROJECTS_MOCK = [
     endDate: "25/06/2025",
     priority: "Urgente",
     color: "orange",
-    tasks: []
+    tasks: [],
+    weeklyData: [
+      { day: 'Seg', hours: 8 },
+      { day: 'Ter', hours: 7 },
+      { day: 'Qua', hours: 8 },
+      { day: 'Qui', hours: 6 },
+      { day: 'Sex', hours: 8 },
+      { day: 'Sáb', hours: 4 },
+      { day: 'Dom', hours: 2 },
+    ]
   },
   {
     id: 4,
@@ -71,6 +98,15 @@ export const PROJECTS_MOCK = [
     endDate: "30/09/2025",
     priority: "Baixa",
     color: "pink",
-    tasks: []
+    tasks: [],
+    weeklyData: [
+      { day: 'Seg', hours: 1 },
+      { day: 'Ter', hours: 2 },
+      { day: 'Qua', hours: 0 },
+      { day: 'Qui', hours: 1 },
+      { day: 'Sex', hours: 2 },
+      { day: 'Sáb', hours: 4 },
+      { day: 'Dom', hours: 0 },
+    ]
   },
 ];

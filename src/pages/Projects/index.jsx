@@ -20,8 +20,8 @@ import {
   Search,
   Plus
 } from "lucide-react"
-import { PaginationProjects } from "../../components/PaginationProjects"
-import { ProjectCard } from "../../components/ProjectCard"
+import { PaginationProjects } from "../../components/features/Projects/PaginationProjects"
+import { ProjectCard } from "../../components/features/Projects/ProjectCard"
 import { PROJECTS_MOCK } from "../../mocks/projectsMock"
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -33,13 +33,13 @@ export default function Projects() {
   useEffect(() => {
     const updateItemsPerPage = () => {
       const width = window.innerWidth;
-      if (width < 760) { 
-        setItemsPerPage(4); 
-      }else if (width < 1024) { 
+      if (width < 760) {
+        setItemsPerPage(4);
+      } else if (width < 1024) {
         setItemsPerPage(2);
-      } else if (width < 1280) { 
+      } else if (width < 1280) {
         setItemsPerPage(3);
-      } else { 
+      } else {
         setItemsPerPage(4);
       }
     };
@@ -48,10 +48,10 @@ export default function Projects() {
     window.addEventListener('resize', updateItemsPerPage);
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, []);
-  
+
   const totalItems = PROJECTS_MOCK.length
   const totalPages = Math.ceil(totalItems / itemsPerPage)
-  
+
   const startIndex = (currentPage - 1) * itemsPerPage
   const currentProjects = PROJECTS_MOCK.slice(startIndex, startIndex + itemsPerPage)
   const emptySlots = itemsPerPage - currentProjects.length
@@ -79,7 +79,7 @@ export default function Projects() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen lg:overflow-hidden lg:h-screen gap-8 md:gap-4 justify-between"> 
+    <div className="flex flex-col min-h-screen lg:overflow-hidden lg:h-screen gap-8 md:gap-4 justify-between">
       <header className="mt-8 sm:mt-10 flex justify-between items-start sm:items-center gap-4 ">
         <div className='flex-1 min-w-0'>
           <h1 className='text-white text-xl sm:text-2xl font-bold tracking-tight truncate'>Projetos</h1>
@@ -95,7 +95,7 @@ export default function Projects() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div className="flex border-white/15 rounded-lg border p-3 sm:p-4 items-center gap-2 sm:gap-3">
           <div className="bg-primaryPurple/35 h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 rounded-lg flex justify-center items-center ">
-            <FolderOpen className="text-primaryPurple" size={24}/>
+            <FolderOpen className="text-primaryPurple" size={24} />
           </div>
           <div className="ml-0 md:ml-4 tracking-tight truncate w-full">
             <p className="text-white text-base md:text-xl  font-bold tracking-tight truncate w-full">12</p>
@@ -104,7 +104,7 @@ export default function Projects() {
         </div>
         <div className="flex border-white/15 rounded-lg border p-3 sm:p-4 items-center gap-2 sm:gap-3">
           <div className="bg-primaryBlue/35 h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 rounded-lg flex justify-center items-center">
-            <AlarmClock className="text-primaryBlue" size={24}/>
+            <AlarmClock className="text-primaryBlue" size={24} />
           </div>
           <div className="ml-0 md:ml-4 tracking-tight truncate w-full">
             <p className="text-white text-base md:text-xl font-bold tracking-tight truncate w-full">180h 25m</p>
@@ -113,7 +113,7 @@ export default function Projects() {
         </div>
         <div className="flex border-white/15 rounded-lg border p-3 sm:p-4 items-center gap-2 sm:gap-3">
           <div className="bg-primaryOrange/35 h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 rounded-lg flex justify-center items-center">
-            <TrendingUp className="text-primaryOrange" size={24}/>
+            <TrendingUp className="text-primaryOrange" size={24} />
           </div>
           <div className="ml-0 md:ml-4 tracking-tight truncate w-full">
             <p className="text-white text-base md:text-xl font-bold tracking-tight truncate w-full">240</p>
@@ -122,7 +122,7 @@ export default function Projects() {
         </div>
         <div className="flex border-white/15 rounded-lg border p-3 sm:p-4 items-center gap-2 sm:gap-3">
           <div className="bg-primaryGreen/35 h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 rounded-lg flex justify-center items-center">
-            <Check className="text-primaryGreen " size={24}/>
+            <Check className="text-primaryGreen " size={24} />
           </div>
           <div className="ml-0 md:ml-4 tracking-tight truncate w-full">
             <p className="text-white text-base md:text-xl font-bold tracking-tight truncate w-full">1</p>
@@ -134,9 +134,9 @@ export default function Projects() {
       <div className="flex flex-col sm:flex-row border-white/15 rounded-lg border p-2 sm:p-2 gap-3">
         <div className="relative w-full sm:w-auto sm:flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-          <Input 
-            placeholder="Buscar Projetos..." 
-            className="bg-primaryBackground border-white/15 text-white pl-10 focus-visible:ring-primaryPurple h-9" 
+          <Input
+            placeholder="Buscar Projetos..."
+            className="bg-primaryBackground border-white/15 text-white pl-10 focus-visible:ring-primaryPurple h-9"
           />
         </div>
         <div className="flex flex-col sm:flex-row gap-3 sm:flex-1">
@@ -161,10 +161,10 @@ export default function Projects() {
             </SelectContent>
           </Select>
         </div>
-        <Button variant="brancoBordas" className="flex-shrink-0 gap-2"><Funnel size={16}/> Limpar</Button>
+        <Button variant="brancoBordas" className="flex-shrink-0 gap-2"><Funnel size={16} /> Limpar</Button>
       </div>
 
-      <div className="flex-1 md:h-[44%] md:flex-none w-full relative"> 
+      <div className="flex-1 md:h-[44%] md:flex-none w-full relative">
         <AnimatePresence mode="popLayout" custom={direction}>
           <motion.div
             key={currentPage}
@@ -178,11 +178,11 @@ export default function Projects() {
               opacity: { duration: 0.2 }
             }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 h-full auto-rows-fr"
->
+          >
             {currentProjects.map((project) => (
               <ProjectCard key={project.id} {...project} />
             ))}
-            
+
             {Array.from({ length: emptySlots }).map((_, index) => (
               <div key={`empty-${index}`} className="invisible" aria-hidden="true" />
             ))}
@@ -193,7 +193,7 @@ export default function Projects() {
       <div className="flex-shrink-0 flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
         <p className="text-gray-300 text-sm">Mostrando {currentProjects.length} de {totalItems} projetos</p>
         <div>
-          <PaginationProjects 
+          <PaginationProjects
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={handlePageChange}

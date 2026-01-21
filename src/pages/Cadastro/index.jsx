@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import CadastroForm from "@/components/CadastroForm"
-import DesktopLogo from "@/components/DesktopLogo"
-import MobileLogo from "@/components/MobileLogo"
+import CadastroForm from "@/components/features/Auth/CadastroForm"
+import DesktopLogo from "@/components/layout/DesktopLogo"
+import MobileLogo from "@/components/layout/MobileLogo"
 
 export default function Cadastro() {
   useEffect(() => {
-      document.title = "Cadastro | Pomodoro";
-    }, []);
+    document.title = "Cadastro | Pomodoro";
+  }, []);
   return (
     <>
       {/* desktop */}
@@ -49,7 +49,7 @@ export default function Cadastro() {
               <p className="text-white mt-4 text-base">
                 <span className="text-primaryPurple bg-primaryBackground pl-1 pr-1 pb-[2px] pt-[2px] rounded ">
                   Crie sua conta em poucos segundos
-                </span> 
+                </span>
                 {" "}e comece sua jornada de aprendizado.
               </p>
             </div>

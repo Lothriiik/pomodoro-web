@@ -14,16 +14,6 @@ import {
 } from "@/components/ui/tooltip";
 import { PROJECTS_MOCK } from "../../mocks/projectsMock";
 
-const weeklyData = [
-  { day: 'Seg', hours: 4 },
-  { day: 'Ter', hours: 6 },
-  { day: 'Qua', hours: 3 },
-  { day: 'Qui', hours: 8 },
-  { day: 'Sex', hours: 5 },
-  { day: 'Sáb', hours: 2 },
-  { day: 'Dom', hours: 0 },
-];
-
 const priorityStyles = {
   Baixa: { color: "text-[#86efac]", bg: "bg-[#86efac]" },
   Média: { color: "text-[#fef08a]", bg: "bg-[#fef08a]" },
@@ -236,7 +226,7 @@ export default function DetailsProjects() {
                       className="w-full h-full"
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={weeklyData}>
+                        <BarChart data={project.weeklyData || []}>
                           <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
                           <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: '#9ca3af', fontSize: 12 }} dy={10} />
                           <YAxis
