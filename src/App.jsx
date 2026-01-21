@@ -14,6 +14,7 @@ export default function App() {
         <Route path="/login" element={<Login />}/>
         <Route path="/cadastro" element={<Cadastro/>}/>
         <Route path="/home/*" element={<HomeLayout />} />
+        <Route path="/*" element={<Navigate to="/login" />} />
       </Routes>
     </>
   )
