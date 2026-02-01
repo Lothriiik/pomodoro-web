@@ -9,8 +9,7 @@ Uma aplicação web moderna para gestão de tempo e tarefas, utilizando a técni
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Shadcn/UI](https://ui.shadcn.com/)
 - [Recharts](https://recharts.org/) (Gráficos)
-- [Vitest](https://vitest.dev/) (Testes)
-- [React Testing Library](https://testing-library.com/)
+
 
 ## 🛠️ Como rodar o projeto
 
